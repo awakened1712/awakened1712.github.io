@@ -3,20 +3,11 @@ title:  "OSCP: Transfer files from Kali to the target machine"
 date:   2018-03-26 03:22:33 +0800
 categories: oscp
 toc: true
-comments: true
 toc_label: "Table of Contents"
 toc_icon: "gear"
 layout: single
 classes:
   - landing
-author:
-  name             : "Awakened"
-  avatar           : "/assets/avatar.jpg"
-  bio              : "An information security enthusiast who is particularly interested in hacking and securing mobile applications"
-  location         : "Singapore"
-  email            : awakened.1712@gmail.com
-  facebook         : h0ngnh4t.ph4m
-  stackoverflow    : 950983/krypton
 ---
 
 Tranfer files to the target machine is particularly useful when we have already had a reverse shell on Windows. Windows does not have convenient commands to download files such as wget in Linux.
