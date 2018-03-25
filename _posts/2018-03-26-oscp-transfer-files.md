@@ -5,7 +5,7 @@ categories: oscp
 toc: true
 toc_label: "Table of Contents"
 toc_icon: "gear"
-layout: posts
+layout: single
 classes:
   - landing
 author:
