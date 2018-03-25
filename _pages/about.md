@@ -7,9 +7,7 @@ toc: true
 a technologist, and a cyber security enthusiast, who has a particular interest in hacking and securing mobile applications
 
 ## Education
-Nanyang Technological University
-Bachelor of Science (B.S.) Computer Science
-2008 – 2012
+Nanyang Technological University, Bachelor of Science (B.S.) Computer Science, 2008 – 2012
 
 ## Experience
 
