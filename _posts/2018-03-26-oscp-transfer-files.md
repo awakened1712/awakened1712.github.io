@@ -3,7 +3,7 @@
 title:  "OSCP: Transfer files from Kali to the target machine"
 date:   2018-03-26 03:22:33 +0800
 categories: oscptoc: true
-layout: post
+layout: posts
 classes:
   - landing
 author:
