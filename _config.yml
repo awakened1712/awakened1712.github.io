@@ -18,7 +18,7 @@ minimal_mistakes_skin    : "air" # "air", "aqua", "contrast", "dark", "dirt", "n
 locale                   : "en-US"
 title                    : "Blog"
 title_separator          : "-"
-name                     : "awakened"
+name                     : "Awakened"
 description              : "Personal blog"
 url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
@@ -97,9 +97,9 @@ analytics:
 
 # Site Author
 author:
-  name             : "awakened"
+  name             : "Awakened"
   avatar           : "/assets/avatar.jpg"
-  bio              : "an information security enthusiast who is particularly interested in hacking and securing mobile applications"
+  bio              : "An information security enthusiast who is particularly interested in hacking and securing mobile applications"
   location         : "Singapore"
   email            : awakened.1712@gmail.com
   uri              :
