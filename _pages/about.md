@@ -1,6 +1,7 @@
 ---
 permalink: /about/
 title: "About me"
+layout: pages
 ---
 
 a technologist, and a cyber security enthusiast, who has a particular interest in hacking and securing mobile applications
