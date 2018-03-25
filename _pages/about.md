@@ -14,6 +14,11 @@ author:
 ## About me
 a technologist, and a cyber security enthusiast, who has a particular interest in hacking and securing mobile applications
 
+## Education
+Nanyang Technological University
+Bachelor of Science (B.S.) Computer Science
+2008 – 2012
+
 ## Experience
 Ethical Hacker at Gemalto from Jul 2015 to present
 - Perform threat modeling, architecture review and security code audit for mobile apps/frameworks.
