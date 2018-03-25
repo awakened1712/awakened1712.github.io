@@ -11,7 +11,7 @@ Bachelor of Science (B.S.) Computer Science
 2008 – 2012
 
 ## Experience
-Ethical Hacker at Gemalto from Jul 2015 to present
+### Jul 2015 to present
 - Perform threat modeling, architecture review and security code audit for mobile apps/frameworks.
 - Perform manual pentests and exploitation development for mobile apps.
 - Investigate and propose security measures for the mobile threats: obfuscation, anti-debugging, anti-tampering, anti-hooking, root/jailbreak detection.
@@ -19,8 +19,8 @@ Ethical Hacker at Gemalto from Jul 2015 to present
 - Analyze security of mobile security suites and give advice for the business decisions.
 - Provide security trainings and secure coding guidelines
 - "The best creative contributor" award in 2016
-
-Mobile Security Researcher at V-Key Inc from Jun 2012 to Jul 2015
+### Jun 2012 to Jul 2015
+Mobile Security Researcher at V-Key Inc
 - Research and analyze various types of attacks on mobile devices (Android and iOS): keyloggers, trojans, kernel rootkits, spoofers, debuggers, jailbreak/root exploits.
 - Develop mobile library to detect suspicious tampering (debugging, static patching, hooking, memory dumping) and protect mobile applications against them.
 - Pentest internal products to find the vulnerabilities.
