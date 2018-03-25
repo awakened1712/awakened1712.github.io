@@ -1,14 +1,6 @@
 ---
 permalink: /about/
 title: "About"
-author:
-  name             : "Awakened"
-  avatar           : "/assets/avatar.jpg"
-  bio              : "An information security enthusiast who is particularly interested in hacking and securing mobile applications"
-  location         : "Singapore"
-  email            : awakened.1712@gmail.com
-  facebook         : h0ngnh4t.ph4m
-  stackoverflow    : 950983/krypton
 ---
 
 ## About me
