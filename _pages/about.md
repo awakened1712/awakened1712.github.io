@@ -1,9 +1,8 @@
 ---
 permalink: /about/
-title: "About"
+title: "About me"
 ---
 
-## About me
 a technologist, and a cyber security enthusiast, who has a particular interest in hacking and securing mobile applications
 
 ## Education
