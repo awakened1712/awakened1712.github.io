@@ -264,6 +264,9 @@ defaults:
       comments: true
       share: true
       related: true
+      toc: true
+      toc_label: "Table of Contents"
+      toc_icon: "gear"
   # _pages
   - scope:
       path: "_pages"
