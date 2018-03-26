@@ -1,7 +1,9 @@
 # main links
 main:
+  - title: "OSCP"
+    url: /categories/#oscp
   - title: "About"
-    url: https://awakened1712.github.io/about/
+    url: /about/
   # - title: "Sample Posts"
   #   url: /year-archive/
   # - title: "Sample Collections"
