@@ -100,8 +100,6 @@ author:
   name             : "Awakened"
   avatar           : "/assets/avatar.jpg"
   bio              : "a technologist and an information security enthusiast"
-  location         : "Singapore"
-  email            : awakened.1712@gmail.com
   uri              :
   home             : # null (default), "absolute or relative url to link to author home"
   bitbucket        :
@@ -116,7 +114,7 @@ author:
   keybase          :
   instagram        :
   lastfm           :
-  linkedin         : # "john-doe-12345678" (the last part of your profile url, e.g. https://www.linkedin.com/in/john-doe-12345678)
+  linkedin         : hongnhat
   pinterest        :
   soundcloud       :
   stackoverflow    : 950983/krypton
@@ -127,7 +125,8 @@ author:
   weibo            :
   xing             :
   youtube          : # "https://youtube.com/c/MichaelRoseDesign"
-
+  email            : awakened.1712@gmail.com
+  location         : "Singapore"
 
 # Reading Files
 include:
