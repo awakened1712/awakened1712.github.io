@@ -150,17 +150,21 @@ function reverse_shell() {
 ```
 
 **References:**
-- LFI:
-http://resources.infosecinstitute.com/local-file-inclusion-code-execution/
-https://www.aptive.co.uk/blog/local-file-inclusion-lfi-testing/
-https://www.sunnyhoi.com/how-to-hack-a-website-using-local-file-inclusion-lfi/
-- TTY:
-http://pentestmonkey.net/blog/post-exploitation-without-a-tty
-https://blog.ropnop.com/upgrading-simple-shells-to-fully-interactive-ttys/
-- Reverse shell:
-https://highon.coffee/blog/reverse-shell-cheat-sheet/
-https://netsec.ws/?p=331
-- PHP disable_functions
-http://blog.safebuff.com/2016/05/06/disable-functions-bypass/
-- Netcat missing -e
-https://pen-testing.sans.org/blog/2013/05/06/netcat-without-e-no-problem/
+LFI:
+- http://resources.infosecinstitute.com/local-file-inclusion-code-execution/
+- https://www.aptive.co.uk/blog/local-file-inclusion-lfi-testing/
+- https://www.sunnyhoi.com/how-to-hack-a-website-using-local-file-inclusion-lfi/
+
+TTY:
+- http://pentestmonkey.net/blog/post-exploitation-without-a-tty
+- https://blog.ropnop.com/upgrading-simple-shells-to-fully-interactive-ttys/
+
+Reverse shell:
+- https://highon.coffee/blog/reverse-shell-cheat-sheet/
+- https://netsec.ws/?p=331
+
+PHP disable_functions
+- http://blog.safebuff.com/2016/05/06/disable-functions-bypass/
+
+Netcat missing -e
+- https://pen-testing.sans.org/blog/2013/05/06/netcat-without-e-no-problem/
