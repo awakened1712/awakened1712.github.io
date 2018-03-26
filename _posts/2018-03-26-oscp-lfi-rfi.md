@@ -6,14 +6,15 @@ classes:
   - landing
 ---
 
-## 1. Local file inclusion (LFI)
 LFI happens when an PHP page explicitly calls include function to embed another PHP page, which can be controlled by the attacker.
 For example, addguestbook.php below include another PHP page that can be chosen depending on the language input:
 ```php
 $lang = $_GET['LANG'];
 include( $lang . '.php' );
 ```
-Because the LANG field can be controlled, the attacker can put in the path to a local file.
+Because the LANG field can be controlled, the attacker can put in the path to a local or remote file.
+
+## 1. Local file inclusion (LFI)
 ### a. Reading arbitrary files
 Windows hosts file:
 `http://10.11.23.188/addguestbook.php?LANG=../../windows/system32/drivers/etc/hosts%00&name=test&comment=test`
