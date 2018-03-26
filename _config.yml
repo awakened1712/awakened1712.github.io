@@ -22,9 +22,9 @@ name                     : "Awakened"
 description              : "Mostly about programming and hacking stuffs"
 url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
-repository               : awakened1712/awakened1712.github.io # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
+repository               : awakened1712/awakened1712.github.io
 teaser                   : # "/assets/teaser.jpg"
-breadcrumbs              : true # true, false (default)
+breadcrumbs              : # true, false (default)
 words_per_minute         : 200
 comments:
   provider               : "staticman_v2" # false (default), "disqus", "discourse", "facebook", "google-plus", "staticman_v2", "staticman" "custom"
@@ -38,14 +38,14 @@ comments:
     num_posts            : # 5 (default)
     colorscheme          : # "light" (default), "dark"
 staticman:
-  allowedFields          : # ['name', 'email', 'url', 'message']
+  allowedFields          : ['name', 'email', 'url', 'message']
   branch                 : "master"
   commitMessage          : # "New comment"
   filename               : # comment-{@timestamp}
   format                 : # "yml"
   moderation             : # true
   path                   : # "_data/comments/{options.slug}"
-  requiredFields         : # ['name', 'email', 'message']
+  requiredFields         : ['name', 'message']
   transforms:
     email                : # "md5"
   generatedFields:
