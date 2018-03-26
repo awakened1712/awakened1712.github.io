@@ -1,5 +1,5 @@
 ---
-title:  "OSCP: LFI and RFI"
+title:  "LFI and RFI"
 date:   2018-03-26 03:22:33 +0800
 categories: oscp
 classes:
@@ -150,6 +150,7 @@ function reverse_shell() {
 ```
 
 **References:**
+
 LFI:
 - http://resources.infosecinstitute.com/local-file-inclusion-code-execution/
 - https://www.aptive.co.uk/blog/local-file-inclusion-lfi-testing/
