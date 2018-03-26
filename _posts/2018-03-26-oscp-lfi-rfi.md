@@ -1,7 +1,7 @@
 ---
 title:  "LFI and RFI"
 date:   2018-03-26 03:22:33 +0800
-categories: oscp
+categories: OSCP
 classes:
   - landing
 ---
