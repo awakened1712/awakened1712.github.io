@@ -27,14 +27,14 @@ teaser                   : # "/assets/teaser.jpg"
 breadcrumbs              : # true, false (default)
 words_per_minute         : 200
 comments:
-  provider               : "staticman_v2" # false (default), "disqus", "discourse", "facebook", "google-plus", "staticman_v2", "staticman" "custom"
+  provider               : "staticman_v2", "disqus", "facebook" # false (default), "disqus", "discourse", "facebook", "google-plus", "staticman_v2", "staticman" "custom"
   disqus:
     shortname            : awakened1712
   discourse:
     server               : # https://meta.discourse.org/t/embedding-discourse-comments-via-javascript/31963 , e.g.: meta.discourse.org
   facebook:
     # https://developers.facebook.com/docs/plugins/comments
-    appid                :
+    appid                : 176738852405609
     num_posts            : # 5 (default)
     colorscheme          : # "light" (default), "dark"
 staticman:
