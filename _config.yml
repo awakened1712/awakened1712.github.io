@@ -27,7 +27,7 @@ teaser                   : # "/assets/teaser.jpg"
 breadcrumbs              : # true, false (default)
 words_per_minute         : 200
 comments:
-  provider               : "facebook" # false (default), "disqus", "discourse", "facebook", "google-plus", "staticman_v2", "staticman" "custom"
+  provider               : "staticman_v2" # false (default), "disqus", "discourse", "facebook", "google-plus", "staticman_v2", "staticman" "custom"
   disqus:
     shortname            : awakened1712
   discourse:
