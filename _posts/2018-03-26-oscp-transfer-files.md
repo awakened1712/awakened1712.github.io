@@ -4,6 +4,8 @@ date:   2018-03-26 03:22:33 +0800
 categories: OSCP
 classes:
   - landing
+header:
+  teaser: /assets/img/oscp-teaser.jpg
 ---
 
 Tranfer files to the target machine is particularly useful when we have already had a reverse shell on Windows. Windows does not have convenient commands to download files such as wget in Linux.
