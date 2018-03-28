@@ -4,6 +4,8 @@ date:   2018-03-26 03:22:33 +0800
 categories: OSCP
 classes:
   - landing
+header:
+  teaser: /assets/img/oscp-teaser.jpg
 ---
 
 LFI happens when an PHP page explicitly calls include function to embed another PHP page, which can be controlled by the attacker.
