@@ -455,10 +455,10 @@
 .comment__date {
   @extend .page__meta;
   margin: 0;
+  font-size: $type-size-7;
 
   a {
     text-decoration: none;
-    font-size: $type-size-7;
   }
 }
 
