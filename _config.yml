@@ -20,7 +20,7 @@ title                    : "Home"
 title_separator          : "-"
 name                     : "Awakened"
 description              : "Mostly about programming and hacking stuffs"
-url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+url                      : https://awakened1712.github.io
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : awakened1712/awakened1712.github.io
 teaser                   : # "/assets/teaser.jpg"
@@ -100,8 +100,8 @@ author:
   name             : "Awakened"
   avatar           : "/assets/img/avatar1.jpg"
   bio              : "a technologist and an information security enthusiast"
-  uri              : /about/
-  home             : /about/ # null (default), "absolute or relative url to link to author home"
+  uri              : "/about/"
+  home             : "/about/" # null (default), "absolute or relative url to link to author home"
   bitbucket        :
   codepen          :
   dribbble         :
