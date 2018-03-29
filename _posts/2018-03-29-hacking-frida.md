@@ -1,6 +1,6 @@
 ---
 title:  "Frida cheat sheet"
-date:   2018-03-26 03:22:33 +0800
+date:   2018-03-29 19:00:33 +0800
 categories: Hacking
 classes:
   - landing
