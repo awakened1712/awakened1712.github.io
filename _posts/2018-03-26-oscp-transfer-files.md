@@ -1,6 +1,6 @@
 ---
 title:  "Transfer files from Kali to the target machine"
-date:   2018-03-26 03:22:33 +0800
+date:   2018-03-26 05:22:33 +0800
 categories: OSCP
 classes:
   - landing
