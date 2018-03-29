@@ -5,18 +5,18 @@
 div.highlighter-rouge,
 figure.highlight {
   position: relative;
-  margin-bottom: 1em;
+  margin-bottom: $type-size-7;
   background: $base00;
   color: $base05;
   font-family: $monospace;
   font-size: $type-size-7;
-  line-height: 1.8;
+  line-height: 1.7;
   border-radius: $border-radius;
 
   > pre,
   pre.highlight {
     margin: 0;
-    padding: 1em;
+    padding: $type-size-7;
   }
 }
 
@@ -27,14 +27,14 @@ figure.highlight {
 
   td {
     padding: 0;
-    width: calc(100% - 1em);
+    width: calc(100% - $type-size-7);
     border: 0;
 
     /* line numbers*/
     &.gutter,
     &.rouge-gutter {
       padding-right: 1em;
-      width: 1em;
+      width: $type-size-7;
       color: $base04;
       border-right: 1px solid $base04;
       text-align: right;
@@ -43,7 +43,7 @@ figure.highlight {
     /* code */
     &.code,
     &.rouge-code {
-      padding-left: 1em;
+      padding-left: $type-size-7;
     }
   }
 
