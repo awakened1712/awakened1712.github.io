@@ -148,7 +148,7 @@
   .archive__item-excerpt {
     display: none;
 
-    @include breakpoint($medium) {
+    @include breakpoint($large) {
       display: block;
       font-size: $type-size-6;
     }
@@ -159,7 +159,7 @@
       max-height: 200px;
     }
 
-    @include breakpoint($medium) {
+    @include breakpoint($large) {
       max-height: 120px;
     }
   }
