@@ -117,6 +117,7 @@
     }
   }
 
+  /*
   @include breakpoint($medium) {
     margin-left: 0; /* override margin*/
     margin-right: 0; /* override margin*/
@@ -141,6 +142,25 @@
     }
 
     &:nth-child(4n + 4) {
+      clear: none;
+      margin-left: gutter(1 of 12);
+    }
+  }
+  */
+
+  @include breakpoint($medium) {
+    width: span(4 of 12);
+
+    &:nth-child(3n + 1) {
+      clear: both;
+    }
+
+    &:nth-child(3n + 2) {
+      clear: none;
+      margin-left: gutter(1 of 12);
+    }
+
+    &:nth-child(3n + 3) {
       clear: none;
       margin-left: gutter(1 of 12);
     }
