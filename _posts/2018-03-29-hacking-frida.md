@@ -153,7 +153,7 @@ Interceptor.attach(sendMessage.implementation, {
     }
 });
 ```
-Android: Hook SecretKeySpec to print out the key byte array
+Android: Hook constructor method of SecretKeySpec to print out the key byte array
 ```javascript
 Java.perform(function () {
     var SecretKeySpec = Java.use('javax.crypto.spec.SecretKeySpec');
@@ -170,7 +170,6 @@ function bytes2hex(array) {
     return result;
 }
 ```
-
 
 
 
