@@ -115,29 +115,34 @@ function resolveAddress(name, idaBase, idaAddr) {
     return result;
 }
 ```
-Android: Hook Java File.delete() method to save a files that is going to be deleted
+Android: Hook C remove() function to save a files that is going to be deleted
 ```javascript
-Java.perform(function () {
-    var File = Java.use("java.io.File");
-    var FileInputStream = Java.use("java.io.FileInputStream");
-    var FileOutputStream = Java.use("java.io.FileOutputStream");
-    var AndroidAppHelper = Java.use('android.app.AndroidAppHelper');
-    
-    var name = 0;
-    File.delete.implementation = function() {
-        // create the input channel
-        var fis = FileInputStream.$new(this);
-        var inChannel = fis.getChannel();
-        // create the output channet
-        var context = AndroidAppHelper.currentApplication();
-        var fos = context.openFileOutput('deleted_' + name, 0);
-        name = name + 1;
-        var outChannel = fos.getChannel();
-        // transfer the file from the input channel to the output channel
-        inChannel.transferTo(0, inChannel.size(), outChannel);
-        fis.close();
-        fos.close();
-        return this.delete();
+var name = 0;
+Interceptor.attach(Module.findExportByName(null, "remove"), {
+    onEnter: function (args) {
+        path = Memory.readUtf8String(args[0]);
+        Java.perform(function () {
+            var File = Java.use("java.io.File");
+            var FileInputStream = Java.use("java.io.FileInputStream");
+            var FileOutputStream = Java.use("java.io.FileOutputStream");
+            var ActivityThread = Java.use("android.app.ActivityThread");
+            // create the input channel
+            var f = File.$new(path);
+            var fis = FileInputStream.$new(f);
+            var inChannel = fis.getChannel();
+            // create the output channet
+            var application = ActivityThread.currentApplication();
+            var context = application.getApplicationContext();
+            var fos = context.openFileOutput('deleted_' + name, 0);
+            name = name + 1;
+            var outChannel = fos.getChannel();
+            // transfer the file from the input channel to the output channel
+            inChannel.transferTo(0, inChannel.size(), outChannel);
+            fis.close();
+            fos.close();
+        });
+    },
+    onLeave: function (retval) {
     }
 });
 ```
