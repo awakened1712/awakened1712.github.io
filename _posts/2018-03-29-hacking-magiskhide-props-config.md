@@ -19,4 +19,4 @@ After installing and rebooting:
 su
 props
 ```
-Then, choose `MagiskHide props` to change ro.debuggable to 1
+Then, choose `MagiskHide props` to change `ro.debuggable` to 1
