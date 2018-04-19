@@ -115,6 +115,12 @@ function resolveAddress(name, idaBase, idaAddr) {
     return result;
 }
 ```
+Invoke a libc function
+```javascript
+var openPtr = Module.findExportByName("libc.so", "open");
+var open = new NativeFunction(openPtr, 'int', ['pointer', 'int']);
+var fd = open('/tmp/test.txt', 0);
+```
 Android: Hook C remove() function to save a files that is going to be deleted
 ```javascript
 var name = 0;
