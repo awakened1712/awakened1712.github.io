@@ -115,6 +115,68 @@ function resolveAddress(name, idaBase, idaAddr) {
     return result;
 }
 ```
+Print the backtraces of a list of functions
+```javascript
+var funcs = [ '0x21B248', '0x21D0C8', '0x234730', '0x23F718', '0x259E68' ];
+for (var i in funcs) {
+    var funcPtr = resolveAddress('libd.so', '0x0', funcs[i]);
+    var handler = (function() {
+        var name = funcs[i];
+        return function(args) {
+            var trace = Thread.backtrace(this.context, Backtracer.ACCURATE).map(DebugSymbol.fromAddress);
+            console.log(name + ': ');
+            for (var j in trace)
+                console.log(trace[j]);
+        };
+    })();
+    Interceptor.attach(funcPtr, {onEnter: handler});
+}
+```
+Print the execution traces of a list of functions with Stalker
+```javascript
+var funcs = [ '0x870FF0', '0x871BA0' ];
+const STALKED = 12345;
+const STARTING_ADDRESS = "0x102FE0";
+const ENDING_ADDRESS = "0x89BE04";
+var threads = [];
+var base = Module.findBaseAddress('libd.so');
+for (var i in funcs) {
+    console.log('Hooking funcs[' + i + '] ' + funcs[i]);
+    var funcPtr = resolveAddress('libd.so', '0x0', funcs[i]);
+    Interceptor.attach(resolveAddress('libd.so', '0x0', funcs[i]), {
+        onEnter: function (args) {
+            var tid = Process.getCurrentThreadId();
+            if (threads[tid] == STALKED)
+                return;
+            console.log('Stalking ' + tid);
+            Stalker.follow(tid, {
+                events: {
+                    call: true, // CALL instructions: yes please
+                    ret: false, // RET instructions: no thanks
+                    exec: false // all instructions: no thanks
+                },
+                onCallSummary: function (summary) {
+                    var log = []
+                    for (i in summary) {
+                        var addr = ptr(i).sub(base);
+                        if (addr.compare(ptr(STARTING_ADDRESS)) >= 0 && addr.compare(ptr(ENDING_ADDRESS)) <= 0)
+                            log.push(addr);
+                    }
+                    console.log(JSON.stringify(log));
+                }
+            });
+            threads[tid] = STALKED;
+        },
+        onLeave: function (retval) {
+            var tid = Process.getCurrentThreadId();
+            if (threads[tid] == STALKED)
+                return;
+            Stalker.unfollow(tid);
+            Stalker.garbageCollect();
+        }
+    });
+}
+```
 Invoke a libc function
 ```javascript
 var openPtr = Module.findExportByName("libc.so", "open");
