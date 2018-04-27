@@ -90,7 +90,7 @@ Interceptor.attach(Module.findExportByName("liba.so", "HMAC"), {
 ```
 Hook a static function by resolving its address
 ```javascript
-var fstatat = resolveAddress('liba.so', '0x0', '0x69E238');
+const fstatat = resolveAddress('liba.so', '0x0', '0x69E238');
 Interceptor.attach(fstatat, {
     onEnter: function (args) {
         console.log('[+] fstatat: ' + Memory.readUtf8String(args[1]));
@@ -117,7 +117,7 @@ function resolveAddress(name, idaBase, idaAddr) {
 ```
 Print the backtraces of a list of functions
 ```javascript
-var funcs = [ '0x21B248', '0x21D0C8', '0x234730', '0x23F718', '0x259E68' ];
+const funcs = [ '0x21B248', '0x21D0C8', '0x234730', '0x23F718', '0x259E68' ];
 for (var i in funcs) {
     var funcPtr = resolveAddress('libd.so', '0x0', funcs[i]);
     var handler = (function() {
@@ -134,7 +134,7 @@ for (var i in funcs) {
 ```
 Print the execution traces of a list of functions with Stalker
 ```javascript
-var funcs = [ '0x870FF0', '0x871BA0' ];
+const funcs = [ '0x870FF0', '0x871BA0' ];
 const STALKED = 12345;
 const STARTING_ADDRESS = "0x102FE0";
 const ENDING_ADDRESS = "0x89BE04";
@@ -185,15 +185,15 @@ var fd = open('/tmp/test.txt', 0);
 ```
 Android: Hook C remove() function to save a files that is going to be deleted
 ```javascript
+var File = Java.use("java.io.File");
+var FileInputStream = Java.use("java.io.FileInputStream");
+var FileOutputStream = Java.use("java.io.FileOutputStream");
+var ActivityThread = Java.use("android.app.ActivityThread");
 var name = 0;
 Interceptor.attach(Module.findExportByName(null, "remove"), {
     onEnter: function (args) {
         path = Memory.readUtf8String(args[0]);
         Java.perform(function () {
-            var File = Java.use("java.io.File");
-            var FileInputStream = Java.use("java.io.FileInputStream");
-            var FileOutputStream = Java.use("java.io.FileOutputStream");
-            var ActivityThread = Java.use("android.app.ActivityThread");
             // create the input channel
             var f = File.$new(path);
             var fis = FileInputStream.$new(f);
@@ -243,7 +243,5 @@ function bytes2hex(array) {
     return result;
 }
 ```
-
-
 
 
