@@ -74,6 +74,20 @@ $ frida-trace -U -m "-[NSView drawRect:]" Safari
 ```
 
 ## Common scripts
+Convert IDA address to memory address and vice versa
+```javascript
+function memAddress(memBase, idaBase, idaAddr) {
+    var offset = ptr(idaAddr).sub(idaBase);
+    var result = ptr(memBase).add(offset);
+    return result;
+}
+
+function idaAddress(memBase, idaBase, memAddr) {
+    var offset = ptr(memAddr).sub(memBase);
+    var result = ptr(idaBase).add(offset);
+    return result;
+}
+```
 Hook HMAC function and print out the params
 ```javascript
 Interceptor.attach(Module.findExportByName("liba.so", "HMAC"), {
@@ -90,7 +104,8 @@ Interceptor.attach(Module.findExportByName("liba.so", "HMAC"), {
 ```
 Hook a static function by resolving its address
 ```javascript
-const fstatat = resolveAddress('liba.so', '0x0', '0x69E238');
+const membase = Module.findBaseAddress('libtest.so');
+const fstatat = memAddress(membase, '0x0', '0x69E238');
 Interceptor.attach(fstatat, {
     onEnter: function (args) {
         console.log('[+] fstatat: ' + Memory.readUtf8String(args[1]));
@@ -99,27 +114,13 @@ Interceptor.attach(fstatat, {
     onLeave: function (retval) {
     }
 });
- 
-function resolveAddress(name, idaBase, idaAddr) {
-    var baseAddr = Module.findBaseAddress(name);
-    console.log('[+] BaseAddr of ' + name + ': ' + baseAddr);
-      
-    // Calculate offset in memory from base address in IDA database
-    var offset = ptr(idaAddr).sub(idaBase);
-      
-    // Add current memory base address to offset of function to monitor
-    var result = baseAddr.add(offset);
-      
-    // Write location of function in memory to console
-    console.log('[+] Address in memory: ' + result);
-    return result;
-}
 ```
 Print the backtraces of a list of functions
 ```javascript
+const membase = Module.findBaseAddress('libtest.so');
 const funcs = [ '0x21B248', '0x21D0C8', '0x234730', '0x23F718', '0x259E68' ];
 for (var i in funcs) {
-    var funcPtr = resolveAddress('libd.so', '0x0', funcs[i]);
+    var funcPtr = memAddress(membase, '0x0', funcs[i]);
     var handler = (function() {
         var name = funcs[i];
         return function(args) {
@@ -139,11 +140,11 @@ const STALKED = 12345;
 const STARTING_ADDRESS = "0x102FE0";
 const ENDING_ADDRESS = "0x89BE04";
 var threads = [];
-var base = Module.findBaseAddress('libd.so');
+var base = Module.findBaseAddress('libtest.so');
 for (var i in funcs) {
     console.log('Hooking funcs[' + i + '] ' + funcs[i]);
-    var funcPtr = resolveAddress('libd.so', '0x0', funcs[i]);
-    Interceptor.attach(resolveAddress('libd.so', '0x0', funcs[i]), {
+    var funcPtr = memAddress(base, '0x0', funcs[i]);
+    Interceptor.attach(funcPtr, {
         onEnter: function (args) {
             var tid = Process.getCurrentThreadId();
             if (threads[tid] == STALKED)
@@ -158,7 +159,7 @@ for (var i in funcs) {
                 onCallSummary: function (summary) {
                     var log = []
                     for (i in summary) {
-                        var addr = ptr(i).sub(base);
+                        var addr = idaAddress(base, '0x0', i);
                         if (addr.compare(ptr(STARTING_ADDRESS)) >= 0 && addr.compare(ptr(ENDING_ADDRESS)) <= 0)
                             log.push(addr);
                     }
