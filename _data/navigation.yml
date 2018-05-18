@@ -1,5 +1,7 @@
 # main links
 main:
+  - title: "Programming"
+    url: /categories/#programming
   - title: "Hacking"
     url: /categories/#hacking
   - title: "OSCP"
