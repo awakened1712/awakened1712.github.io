@@ -10,7 +10,7 @@ header:
 
 This blog post is a memo of handy Android code snippets that I found particularly useful in programming and hacking.
 
-## Execute a shell command as root
+### Execute a shell command as root
 ```java
     public static String execRootCmd(String cmd) {
         String result = "";
