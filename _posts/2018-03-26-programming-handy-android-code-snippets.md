@@ -11,6 +11,7 @@ header:
 This blog post is a memo of handy Android code snippets that I found particularly useful in programming and hacking.
 
 ### Execute a shell command as root
+Reference: https://blog.csdn.net/black_bird_cn/article/details/79717245
 ```java
 public static String execRootCmd(String cmd) {
     String result = "";
