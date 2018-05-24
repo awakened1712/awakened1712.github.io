@@ -18,10 +18,10 @@ import frida, sys
 ss = """
 Java.perform(function () {
     // declare classes that are going to be used
-    var System = Java.use('java.lang.System');
-    var Log = Java.use("android.util.Log");
-    var Exception = Java.use("java.lang.Exception");
-     
+    const System = Java.use('java.lang.System');
+    const Log = Java.use("android.util.Log");
+    const Exception = Java.use("java.lang.Exception");
+    
     System.exit.implementation = function() {
         // console.log(Log.getStackTraceString(Exception.$new()));
     };
@@ -40,10 +40,10 @@ import frida, sys
 ss = """
 Java.perform(function () {
     // declare classes that are going to be used
-    var System = Java.use('java.lang.System');
-    var Log = Java.use("android.util.Log");
-    var Exception = Java.use("java.lang.Exception");
-     
+    const System = Java.use('java.lang.System');
+    const Log = Java.use("android.util.Log");
+    const Exception = Java.use("java.lang.Exception");
+    
     System.exit.implementation = function() {
         // console.log(Log.getStackTraceString(Exception.$new()));
     };
@@ -139,17 +139,15 @@ const funcs = [ '0x870FF0', '0x871BA0' ];
 const STALKED = 12345;
 const STARTING_ADDRESS = "0x102FE0";
 const ENDING_ADDRESS = "0x89BE04";
+const base = Module.findBaseAddress('libtest.so');
 var threads = [];
-var base = Module.findBaseAddress('libtest.so');
 for (var i in funcs) {
     console.log('Hooking funcs[' + i + '] ' + funcs[i]);
-    var funcPtr = memAddress(base, '0x0', funcs[i]);
-    Interceptor.attach(funcPtr, {
+    Interceptor.attach(memAddress(base, '0x0', funcs[i]), {
         onEnter: function (args) {
             var tid = Process.getCurrentThreadId();
             if (threads[tid] == STALKED)
                 return;
-            console.log('Stalking ' + tid);
             Stalker.follow(tid, {
                 events: {
                     call: true, // CALL instructions: yes please
@@ -186,10 +184,10 @@ var fd = open('/tmp/test.txt', 0);
 ```
 Android: Hook C remove() function to save a files that is going to be deleted
 ```javascript
-var File = Java.use("java.io.File");
-var FileInputStream = Java.use("java.io.FileInputStream");
-var FileOutputStream = Java.use("java.io.FileOutputStream");
-var ActivityThread = Java.use("android.app.ActivityThread");
+const File = Java.use("java.io.File");
+const FileInputStream = Java.use("java.io.FileInputStream");
+const FileOutputStream = Java.use("java.io.FileOutputStream");
+const ActivityThread = Java.use("android.app.ActivityThread");
 var name = 0;
 Interceptor.attach(Module.findExportByName(null, "remove"), {
     onEnter: function (args) {
@@ -217,7 +215,7 @@ Interceptor.attach(Module.findExportByName(null, "remove"), {
 ```
 iOS: Hook an Obj-C method
 ```javascript
-var sendMessage = ObjC.classes.SecureStorage["- readFile:"];
+const sendMessage = ObjC.classes.SecureStorage["- readFile:"];
 Interceptor.attach(sendMessage.implementation, {
     onEnter: function(args) {
     },
