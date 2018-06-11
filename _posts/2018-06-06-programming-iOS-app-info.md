@@ -4,6 +4,8 @@ date:   2018-06-06 17:22:33 +0800
 categories: Programming
 classes:
   - landing
+header:
+  teaser: assets/img/RB%20App%20Checker.png
 ---
 
 This tiny yet powerful app lets us check the iOS application for the certificates, requirements and entitlements, embedded provisioning profiles, auxiliary executables and frameworks, cross-check all this information for consistency, and check that the application’s resources have not been altered after signing.
