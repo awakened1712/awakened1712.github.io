@@ -74,7 +74,7 @@ $ frida-trace -U -m "-[NSView drawRect:]" Safari
 ```
 
 ## Common scripts
-Convert IDA address to memory address and vice versa
+### Convert IDA address to memory address and vice versa
 ```javascript
 function memAddress(memBase, idaBase, idaAddr) {
     var offset = ptr(idaAddr).sub(idaBase);
@@ -88,7 +88,7 @@ function idaAddress(memBase, idaBase, memAddr) {
     return result;
 }
 ```
-Hook HMAC function and print out the params
+### C: Hook HMAC function and print out the params
 ```javascript
 Interceptor.attach(Module.findExportByName("liba.so", "HMAC"), {
     onEnter: function (args) {
@@ -102,7 +102,7 @@ Interceptor.attach(Module.findExportByName("liba.so", "HMAC"), {
     }
 });
 ```
-Hook a static function by resolving its address
+### C: Hook a static function by resolving its address
 ```javascript
 const membase = Module.findBaseAddress('libtest.so');
 const fstatat = memAddress(membase, '0x0', '0x69E238');
@@ -115,7 +115,7 @@ Interceptor.attach(fstatat, {
     }
 });
 ```
-Print the backtraces of a list of functions
+### C: Print the backtraces of a list of functions
 ```javascript
 const membase = Module.findBaseAddress('libtest.so');
 const funcs = [ '0x21B248', '0x21D0C8', '0x234730', '0x23F718', '0x259E68' ];
@@ -133,7 +133,7 @@ for (var i in funcs) {
     Interceptor.attach(funcPtr, {onEnter: handler});
 }
 ```
-Print the execution traces of a list of functions with Stalker
+### C: Print the execution traces of a list of functions with Stalker
 ```javascript
 const funcs = [ '0x870FF0', '0x871BA0' ];
 const STALKED = 12345;
@@ -176,13 +176,13 @@ for (var i in funcs) {
     });
 }
 ```
-Invoke a libc function
+### C: Invoke a libc function
 ```javascript
 var openPtr = Module.findExportByName("libc.so", "open");
 var open = new NativeFunction(openPtr, 'int', ['pointer', 'int']);
 var fd = open('/tmp/test.txt', 0);
 ```
-Android: Hook C remove() function to save a files that is going to be deleted
+### Android: Hook C remove() function to save a files that is going to be deleted
 ```javascript
 const File = Java.use("java.io.File");
 const FileInputStream = Java.use("java.io.FileInputStream");
@@ -199,6 +199,8 @@ Interceptor.attach(Module.findExportByName(null, "remove"), {
             var inChannel = fis.getChannel();
             // create the output channet
             var application = ActivityThread.currentApplication();
+            if (application == null)
+                return;
             var context = application.getApplicationContext();
             var fos = context.openFileOutput('deleted_' + name, 0);
             name = name + 1;
@@ -213,7 +215,7 @@ Interceptor.attach(Module.findExportByName(null, "remove"), {
     }
 });
 ```
-iOS: Hook an Obj-C method
+### iOS: Hook an Obj-C method
 ```javascript
 const sendMessage = ObjC.classes.SecureStorage["- readFile:"];
 Interceptor.attach(sendMessage.implementation, {
@@ -225,7 +227,7 @@ Interceptor.attach(sendMessage.implementation, {
     }
 });
 ```
-Android: Hook constructor method of SecretKeySpec to print out the key byte array
+### Android: Hook constructor method of SecretKeySpec to print out the key byte array
 ```javascript
 Java.perform(function () {
     var SecretKeySpec = Java.use('javax.crypto.spec.SecretKeySpec');
@@ -242,7 +244,7 @@ function bytes2hex(array) {
     return result;
 }
 ```
-Android: Hook the library loading
+### Android: Hook the library loading
 ```javascript
 Java.perform(function() {
     const System = Java.use('java.lang.System');
