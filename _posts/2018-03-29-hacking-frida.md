@@ -62,11 +62,11 @@ Note that we need to load the script first before resuming if we need to perform
 ## frida-trace
 Attach to Chrome app on an Android phone and trace two native functions open and strcmp
 ```
-$ frida-trace -U -i open -i strcmp com.android.chrome
+$ frida-trace -U -i open -i strcmp -f com.android.chrome
 ```
 Launch SnapChat app on an iPhone and trace CommonCrypto API calls
 ```
-$ frida-trace -U -f com.toyopagroup.picaboo -I "libcommonCrypto*"
+$ frida-trace -U -I "libcommonCrypto*" -f com.toyopagroup.picaboo
 ```
 Trace an Obj-C method of Safari app
 ```
@@ -97,8 +97,6 @@ Interceptor.attach(Module.findExportByName("liba.so", "HMAC"), {
         console.log('HMAC Key found at ' + args[1]);
         console.log('HMAC Key size = ' + keySize);
         console.log(hexdump(keyDump, { offset: 0, length: keySize, header: false, ansi: false }));  
-    },
-    onLeave: function (retval) {
     }
 });
 ```
@@ -110,8 +108,6 @@ Interceptor.attach(fstatat, {
     onEnter: function (args) {
         console.log('[+] fstatat: ' + Memory.readUtf8String(args[1]));
         Memory.writeUtf8String(args[1], "/empty");
-    },
-    onLeave: function (retval) {
     }
 });
 ```
@@ -210,8 +206,6 @@ Interceptor.attach(Module.findExportByName(null, "remove"), {
             fis.close();
             fos.close();
         });
-    },
-    onLeave: function (retval) {
     }
 });
 ```
@@ -219,8 +213,6 @@ Interceptor.attach(Module.findExportByName(null, "remove"), {
 ```javascript
 const sendMessage = ObjC.classes.SecureStorage["- readFile:"];
 Interceptor.attach(sendMessage.implementation, {
-    onEnter: function(args) {
-    },
     onLeave: function (retval) {
         var message = ObjC.Object(retval);
         console.log("- [SecureStorage readFile:] -->\n\"" + message.toString() + "\"");
