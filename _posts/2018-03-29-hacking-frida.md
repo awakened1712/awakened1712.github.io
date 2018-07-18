@@ -73,6 +73,15 @@ Trace an Obj-C method of Safari app
 $ frida-trace -U -m "-[NSView drawRect:]" Safari
 ```
 
+## Frida over network
+On the target device (192.168.1.3)
+```
+$ frida-server -l 0.0.0.0
+```
+On the attacking machine
+```
+frida-trace -H 192.168.1.3 -i "open*"
+```
 ## Common scripts
 ### Convert IDA address to memory address and vice versa
 ```javascript
