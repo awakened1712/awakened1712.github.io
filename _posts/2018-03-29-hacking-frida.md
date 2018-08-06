@@ -273,4 +273,20 @@ Java.perform(function() {
     };
 });
 ```
+### Android: Java bytearray dumping
+```javascript
+function bytes2hex(array) {
+    var result = '';
+    for(var i = 0; i < array.length; ++i)
+        result += ('0' + (array[i] & 0xFF).toString(16)).slice(-2);
+    result += ' (' + array.length + ' bytes)'
+    return result;
+}
 
+function jhexdump(array) {
+    var ptr = Memory.alloc(array.length);
+    for(var i = 0; i < array.length; ++i)
+        Memory.writeS8(ptr.add(i), array[i]);
+    console.log(hexdump(ptr, { offset: 0, length: array.length, header: false, ansi: false }));
+}
+```
