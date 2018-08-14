@@ -10,7 +10,7 @@ header:
 
 It’s very trivial to install a user-trusted certificate on Android. Under Settings -> Security you can install new trusted certificates. However, this creates a permanent "Your network could be monitored" warning in your task tray and forces you to have a lock-screen. In addition to this, [apps that target API Level 24 and above no longer trust user or admin-added CAs for secure connections, by default](https://android-developers.googleblog.com/2016/07/changes-to-trusted-certificate.html).
 
-This guide shows how to install a system-trusted CA certificate. Most of the steps are referenced from [Installing a new trusted SSL root certificate on Android](https://jamie.holdings/2016/09/04/Installing-a-new-trusted-SSL-root-certificate-on-Android.html), excep that this guide is adapted to generate only 730-day certificates to deal with error `NET::ERR_CERT_VALIDITY_TOO_LONG` in Chrome
+This guide shows how to install a system-trusted CA certificate. Most of the steps are referenced from [Using a custom root CA with Burp for inspecting Android N traffic](https://blog.nviso.be/2018/01/31/using-a-custom-root-ca-with-burp-for-inspecting-android-n-traffic/), excep that this guide is adapted to generate only 730-day certificates to deal with error `NET::ERR_CERT_VALIDITY_TOO_LONG` in Chrome
 
 ### Generate
 ```bash
