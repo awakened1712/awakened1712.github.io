@@ -28,7 +28,7 @@ Java.perform(function () {
 });
 """
 device = frida.get_device_manager().enumerate_devices()[-1]
-session = device.attach("com.gemalto.gmst.sample")
+session = device.attach("com.example.test")
 script = session.create_script(ss)
 script.load()
 sys.stdin.read()
@@ -50,7 +50,7 @@ Java.perform(function () {
 });
 """
 device = frida.get_usb_device()
-pid = device.spawn(["com.gemalto.gmst.sample"])
+pid = device.spawn(["com.example.test"])
 session = device.attach(pid)
 script = session.create_script(ss)
 script.load()
