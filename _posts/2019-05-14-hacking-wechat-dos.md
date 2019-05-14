@@ -19,14 +19,15 @@ An malware app can crafts a malicious emoji file and overwrites the emoji files 
 ## POC:
 Video at https://drive.google.com/open?id=1x1Z3hm4j8f4rhv_WUp4gW-bhdtZMezdU
 
-User must have sent or received a GIF file in WeChat
-
-Malware app must retrieve the phone's IMEI. For POC, we can use the below command
+- User must have sent or received a GIF file in WeChat
+- Malware app must retrieve the phone's IMEI. For POC, we can use the below command
+```
 adb shell service call iphonesubinfo 1 | awk -F "'" '{print $2}' | sed '1 d' | tr -d '.' | awk '{print}' ORS=- 
-
-Produce the malicious emoji file with the retrieved IMEI (use encrypt_wxgf.py in poc.zip) by running "python encrypt.py crash4.wxgf [SIZE_OF_EMOJI_ON_SDCARD]" to produce out.wxgf
-
-Replace /sdcard/tencent/MicroMsg/[User_ID]/emoji/[WXGF_ID] with the padded out.wxgf.encrypted
-
-WeChat will crash now if a message that contains the overwritten emoji file
+```
+- Produce the malicious emoji file with the retrieved IMEI (use encrypt_wxgf.py in poc.zip):
+```
+python encrypt.py crash4.wxgf [SIZE_OF_EMOJI_ON_SDCARD]
+```
+- Replace /sdcard/tencent/MicroMsg/[User_ID]/emoji/[WXGF_ID] with the padded out.wxgf.encrypted
+- WeChat will crash now if a message that contains the overwritten emoji file
 
