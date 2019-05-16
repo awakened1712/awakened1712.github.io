@@ -12,6 +12,21 @@ This DoS bug was reported to Tencent, but they decided not to fix because it's n
 vcodec2_hls_filter in libvoipCodec_v7a.so in WeChat application for Android results in a DoS by replacing an emoji file (under the /sdcard/tencent/MicroMsg directory) with a crafted .wxgf file.
 Crash-log is provided in poc.zip file at https://drive.google.com/open?id=1HFQtbD10awuUicdWoq3dKVKfv0wvxOKS
 
+## Vulnerability Type:
+Denial of Service
+
+## Vendor of Product:
+Tencent
+
+## Affected Product Code Base:
+WeChat for Android - Up to latest version (7.0.3)
+
+## Affected Component:
+Function vcodec2_hls_filter in libvoipCodec_v7a.so
+
+## Attack Type:
+Local
+
 ## Attack vector:
 An malware app can crafts a malicious emoji file and overwrites the emoji files under `/sdcard/tencent/MicroMsg/[User_ID]/emoji/[WXGF_ID]`. Once the user opens any chat messages that contain an emoji, WeChat will instantly crash.
 
