@@ -6,7 +6,7 @@ classes:
   - landing
 ---
 
-This DoS bug was reported to Tencent, but they decided not to fix because it's not critical.
+This DoS bug was reported to Tencent, but they decided not to fix because it's not critical. The Common Vulnerabilities and Exposures (CVE) Program has assigned the ID CVE-2019-11419 to this issue. 
 
 ## Description:
 vcodec2_hls_filter in libvoipCodec_v7a.so in WeChat application for Android results in a DoS by replacing an emoji file (under the /sdcard/tencent/MicroMsg directory) with a crafted .wxgf file.
