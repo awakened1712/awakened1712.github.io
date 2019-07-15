@@ -129,8 +129,8 @@ for (var i in funcs) {
     var handler = (function() {
         var name = funcs[i];
         return function(args) {
-            var trace = Thread.backtrace(this.context, Backtracer.ACCURATE).map(DebugSymbol.fromAddress);
             console.log(name + ': ');
+            var trace = Thread.backtrace(this.context, Backtracer.ACCURATE).map(DebugSymbol.fromAddress);
             for (var j in trace)
                 console.log(trace[j]);
         };
