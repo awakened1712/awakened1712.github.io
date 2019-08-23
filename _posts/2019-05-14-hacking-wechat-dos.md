@@ -1,5 +1,5 @@
 ---
-title:  "DoS Wechat with an emoji"
+title:  "[CVE-2019-11419] DoS Wechat with an emoji"
 date:   2019-05-14 17:22:33 +0800
 categories: Hacking
 classes:
