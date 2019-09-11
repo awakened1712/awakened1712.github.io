@@ -290,3 +290,18 @@ function jhexdump(array) {
     console.log(hexdump(ptr, { offset: 0, length: array.length, header: false, ansi: false }));
 }
 ```
+### Android: Java inspect a Java class of an Java object
+```javascript
+function inspectObject(obj) {
+    const obj_class = Java.cast(obj.getClass(), Class);
+    const fields = obj_class.getDeclaredFields();
+    const methods = obj_class.getMethods();
+    console.log("Inspecting " + obj.getClass().toString());
+    console.log("\tFields:");
+    for (var i in fields)
+        console.log("\t\t" + fields[i].toString());
+    console.log("\tMethods:");
+    for (var i in methods)
+        console.log("\t\t" + methods[i].toString());
+}
+```
