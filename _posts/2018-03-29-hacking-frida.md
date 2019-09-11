@@ -292,6 +292,7 @@ function jhexdump(array) {
 ```
 ### Android: Java inspect a Java class of an Java object
 ```javascript
+const Class = Java.use("java.lang.Class");
 function inspectObject(obj) {
     const obj_class = Java.cast(obj.getClass(), Class);
     const fields = obj_class.getDeclaredFields();
