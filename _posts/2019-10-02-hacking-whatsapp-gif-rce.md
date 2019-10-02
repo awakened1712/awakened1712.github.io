@@ -9,9 +9,7 @@ header:
 ---
 
 # Demo
-<video autoplay="autoplay" loop="loop" width="640" height="480">
-  <source src="/assets/img/WhatsAPP RCE demo.avi" type="video/avi">
-</video>
+[https://drive.google.com/file/d/1T-v5XG8yQuiPojeMpOAG6UGr2TYpocIj/view](https://drive.google.com/file/d/1T-v5XG8yQuiPojeMpOAG6UGr2TYpocIj/view)
 
 # Double-free vulnerability in DDGifSlurp in decoding.c in libpl_droidsonroids_gif
 
