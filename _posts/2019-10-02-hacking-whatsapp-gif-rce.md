@@ -29,7 +29,7 @@ Re-allocation is a combination of free and malloc. If the size of the re-allocat
 - In the third re-allocation of 0, info->rasterBits is freed again.
 
 This results in a double-free vulnerability. The triggering location can be found in decoding.c:
-```C
+```c
 int_fast32_t widthOverflow = gifFilePtr->Image.Width - info->originalWidth;
 int_fast32_t heightOverflow = gifFilePtr->Image.Height - info->originalHeight;
 const uint_fast32_t newRasterSize =
