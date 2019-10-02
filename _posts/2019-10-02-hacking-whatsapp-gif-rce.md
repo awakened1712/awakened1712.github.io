@@ -8,7 +8,7 @@ header:
   teaser: /assets/img/whatsapp.png
 ---
 
-In this blog post, I'm going to share about a double-free vulnerability that I discovered in WhatsApp, and how I turn it into an RCE. I informed this to Facebook. Facebook acknowledged and patched it officially in WhatsApp version 2.19.244
+In this blog post, I'm going to share about a double-free vulnerability that I discovered in WhatsApp, and how I turn it into an RCE. I informed this to Facebook. Facebook acknowledged and patched it officially in WhatsApp version 2.19.244. WhatsApp users, please do update to latest WhatsApp version (2.19.244 or above) to get rid of this bug.
 
 ## Demo
 
