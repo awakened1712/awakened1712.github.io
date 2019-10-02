@@ -35,9 +35,9 @@ A GIF file contains multiple encoded frames. To store the decoded frames, a buff
 - height - originalHeight > 0
 
 Re-allocation is a combination of free and malloc. If the size of the re-allocation is 0, it is simply a free. Let say we have a GIF file that contains 3 frames that have sizes of 100, 0 and 0.
-- After the first re-allocation, we have info->rasterBits buffer of size 100.
-- In the second re-allocation of 0, info->rasterBits buffer is freed.
-- In the third re-allocation of 0, info->rasterBits is freed again.
+- After the first re-allocation, we have `info->rasterBits` buffer of size 100.
+- In the second re-allocation of 0, `info->rasterBits` buffer is freed.
+- In the third re-allocation of 0, `info->rasterBits` is freed again.
 
 This results in a double-free vulnerability. The triggering location can be found in decoding.c:
 ```c
