@@ -18,7 +18,7 @@ In this blog post, I'm going to share about a double-free vulnerability that I d
 
 When a WhatsApp user opens Gallery view in WhatsApp to send a media file, WhatsApp parses it with a native library called `libpl_droidsonroids_gif.so` to generate the preview of the GIF file. `libpl_droidsonroids_gif.so` is an open-source library with source codes available at [https://github.com/koral--/android-gif-drawable/tree/dev/android-gif-drawable/src/main/c](https://github.com/koral--/android-gif-drawable/tree/dev/android-gif-drawable/src/main/c).
 
-A GIF file contains multiple encoded frames. To store the decoded frames, a buffer named rasterBits is used. If all frames have the same size, rasterBits is re-used to store the decoded frames without re-allocation. However, rasterBits would be re-allocated if one of three conditions below is met:
+A GIF file contains multiple encoded frames. To store the decoded frames, a buffer with name rasterBits is used. If all frames have the same size, rasterBits is re-used to store the decoded frames without re-allocation. However, rasterBits would be re-allocated if one of three conditions below is met:
 
 - width * height > originalWidth * originalHeight
 - width - originalWidth > 0
@@ -109,7 +109,7 @@ We then craft a GIF file with three frames of below sizes:
 - 0
 - 0
 
-When the WhatsApp Gallery is opened, the said GIF file triggers the double-free bug on rasterBits buffer with sizeof(GifInfo). Interestingly, in WhatsApp Gallery, a GIF file is parsed twice. When the said GIF file is parsed again, another GifInfo object is created. Bacause of the double-free behavior in Android, GifInfo object and rasterBits will point to the same address. DDGifSlurp() will then decode the first frame to rasterBits buffer, thus overwriting struct GifInfo and its rewindFunction(), which is called right at the end of DDGifSlurp() function.
+When the WhatsApp Gallery is opened, the said GIF file triggers the double-free bug on rasterBits buffer with size `sizeof(GifInfo)`. Interestingly, in WhatsApp Gallery, a GIF file is parsed twice. When the said GIF file is parsed again, another GifInfo object is created. Bacause of the double-free behavior in Android, GifInfo `info` object and `info->rasterBits` will point to the same address. DDGifSlurp() will then decode the first frame to `info->rasterBits` buffer, thus overwriting `info` and its `rewindFunction()`, which is called right at the end of DDGifSlurp() function.
 
 ## Controlling PC register
 The GIF file that we need to craft is as below:
@@ -167,11 +167,11 @@ The below sequence is what happened when WhatsApp Gallery is opened:
 	- Init:
 		- GifInfo *info = malloc(168);
 	- Frame 1:
-		- info->rasterBits = reallocarray(info->rasterBits, 0x8*0x15, 1)
+		- info->rasterBits = reallocarray(info->rasterBits, 0x8*0x15, 1);
 	- Frame 2:
-		- info->rasterBits = reallocarray(info->rasterBits, 0x0*0xf1c, 1)
+		- info->rasterBits = reallocarray(info->rasterBits, 0x0*0xf1c, 1);
 	- Frame 3:
-		- info->rasterBits = reallocarray(info->rasterBits, 0x0*0xf1c, 1)
+		- info->rasterBits = reallocarray(info->rasterBits, 0x0*0xf1c, 1);
 	- Frame 4:
 		- does not matter, it is there to make this GIF file valid
 - Second parse:
@@ -184,7 +184,7 @@ The below sequence is what happened when WhatsApp Gallery is opened:
 	- End:
 		- info->rewindFunction(info);
 
-Because of the double-free bug occuring in the first parse, info and info->rasterBits now points to the same location. With the first frame crafted as said, we could control rewindFunction and ,thus, PC when `info->rewindFunction(info);` is called.
+Because of the double-free bug occuring in the first parse, `info` and `info->rasterBits` now points to the same location. With the first frame crafted as said, we could control rewindFunction and PC when `info->rewindFunction(info);` is called.
 Take note that the frames are all LZW encoded. We must use an LZW encoder to encode the frames. 
 The above GIF triggers crash as below:
 ```
@@ -274,7 +274,7 @@ C4 C8 21 C3 45 0C 1B 38 5C C8 70 71 43 06 08 1A
 00 00 00 00 00 00 00 00 00 00 00 2C 00 00 00 00
 18 00 0A 00 0F 00 01 00 00 3B
 ```
-Then copy the content into a GIF file and send it as Document with WhatsApp to the victime. Take note that it must not be sent as a Media file, otherwise WhatsApp tries to convert it into an MP4 before sending.
+Then copy the content into a GIF file and send it as Document with WhatsApp to the victim. Take note that it must not be sent as a Media file, otherwise WhatsApp tries to convert it into an MP4 before sending.
 Upon the user receives the malicous GIF file, nothing will happen until the user open WhatsApp Gallery to send a media file to his/her friend.
 
 ## Affected versions
