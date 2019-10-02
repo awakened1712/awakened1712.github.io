@@ -9,15 +9,9 @@ header:
 ---
 
 # Demo
-<div class="embed-container">
-  <iframe
-      width="640"
-      height="480"
-      src="https://drive.google.com/open?id=1T-v5XG8yQuiPojeMpOAG6UGr2TYpocIj"
-      frameborder="0"
-      allowfullscreen="">
-  </iframe>
-</div>
+<video autoplay="autoplay" loop="loop" width="640" height="480">
+  <source src="/assets/img/WhatsAPP RCE demo.avi" type="video/avi">
+</video>
 
 # Double-free vulnerability in DDGifSlurp in decoding.c in libpl_droidsonroids_gif
 
