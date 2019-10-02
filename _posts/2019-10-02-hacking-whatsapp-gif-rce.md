@@ -21,7 +21,7 @@ header:
 
 # Double-free vulnerability in DDGifSlurp in decoding.c in libpl_droidsonroids_gif
 
-When a WhatsApp user opens Gallery view in WhatsApp to send a media file, WhatsApp parses it with a native library called libpl_droidsonroids_gif.so to generate the preview of the GIF file. libpl_droidsonroids_gif.so is an open-source library with source codes available at https://github.com/koral--/android-gif-drawable/tree/dev/android-gif-drawable/src/main/c.
+When a WhatsApp user opens Gallery view in WhatsApp to send a media file, WhatsApp parses it with a native library called `libpl_droidsonroids_gif.so` to generate the preview of the GIF file. `libpl_droidsonroids_gif.so` is an open-source library with source codes available at [https://github.com/koral--/android-gif-drawable/tree/dev/android-gif-drawable/src/main/c](https://github.com/koral--/android-gif-drawable/tree/dev/android-gif-drawable/src/main/c).
 
 A GIF file contains multiple encoded frames. To store the decoded frames, a buffer named rasterBits is used. If all frames have the same size, rasterBits is re-used to store the decoded frames without re-allocation. However, rasterBits would be re-allocated if one of three conditions below is met:
 
@@ -34,7 +34,7 @@ Re-allocation is a combination of free and malloc. If the size of the re-allocat
 - In the second re-allocation of 0, info->rasterBits buffer is freed.
 - In the third re-allocation of 0, info->rasterBits is freed again.
 
-This results in a double-free vulnerability. The triggering location can be found in decoding.c file:
+This results in a double-free vulnerability. The triggering location can be found in decoding.c:
 ```C
 int_fast32_t widthOverflow = gifFilePtr->Image.Width - info->originalWidth;
 int_fast32_t heightOverflow = gifFilePtr->Image.Height - info->originalHeight;
