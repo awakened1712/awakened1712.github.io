@@ -17,7 +17,7 @@ In this blog post, I'm going to share about a double-free vulnerability that I d
 Google Drive link to download if the above link is not accessible [https://drive.google.com/open?id=1X9nBlf5oj5ef2UoYGOfusjxAiow8nKEK](https://drive.google.com/open?id=1X9nBlf5oj5ef2UoYGOfusjxAiow8nKEK)
 
 The steps are as below:
-- 0:16 Attacker send GIF file to user via any channels
+- 0:16 Attacker sends GIF file to user via any channels
 	- One of them could be as Document via WhatsApp (i.e. pressing the Paper Clip button and choose Document to send the corrupted GIF)
 	- If the attacker is in the contact list of the user (i.e. a friend), the corrupted GIF is downloaded automatically without any user interaction).
 - 0:24 User wants to send a media file to any of his/her WhatsApp friend. So the user presses on the Paper clip button and opens the WhatsApp Gallery to choose a media file to send to his friend.
