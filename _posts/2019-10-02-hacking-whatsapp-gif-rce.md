@@ -18,6 +18,7 @@ header:
       allowfullscreen="">
   </iframe>
 </div>
+
 # Double-free vulnerability in DDGifSlurp in decoding.c in libpl_droidsonroids_gif
 
 When a WhatsApp user opens Gallery view in WhatsApp to send a media file, WhatsApp parses it with a native library called libpl_droidsonroids_gif.so to generate the preview of the GIF file. libpl_droidsonroids_gif.so is an open-source library with source codes available at https://github.com/koral--/android-gif-drawable/tree/dev/android-gif-drawable/src/main/c.
