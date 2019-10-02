@@ -14,6 +14,8 @@ In this blog post, I'm going to share about a double-free vulnerability that I d
 
 [https://drive.google.com/file/d/1T-v5XG8yQuiPojeMpOAG6UGr2TYpocIj/view](https://drive.google.com/file/d/1T-v5XG8yQuiPojeMpOAG6UGr2TYpocIj/view)
 
+Google Drive link to download if the above link is not accessible [https://drive.google.com/open?id=1X9nBlf5oj5ef2UoYGOfusjxAiow8nKEK](https://drive.google.com/open?id=1X9nBlf5oj5ef2UoYGOfusjxAiow8nKEK)
+
 ## Double-free vulnerability in DDGifSlurp in decoding.c in libpl_droidsonroids_gif
 
 When a WhatsApp user opens Gallery view in WhatsApp to send a media file, WhatsApp parses it with a native library called `libpl_droidsonroids_gif.so` to generate the preview of the GIF file. `libpl_droidsonroids_gif.so` is an open-source library with source codes available at [https://github.com/koral--/android-gif-drawable/tree/dev/android-gif-drawable/src/main/c](https://github.com/koral--/android-gif-drawable/tree/dev/android-gif-drawable/src/main/c).
@@ -303,7 +305,7 @@ The exploit works well for Android 8.1 and 9.0, but does not work for Android 8.
 With the above exploitation, we can have two attack vectors:
 
 1. Local privilege escaltion (from a user app to WhatsApp): A malicious app is installed on the Android device. The app collects addresses of zygote libraries and generates a malicious GIF file that results in code execution in WhatsApp context. This allows the malware app to steal files in WhatsApp sandbox including message database.
-2. Remote code execution: Pairing with an application that has an remote memory information disclosure vulnerability (e.g. browser), the attacker can collect the addresses of zygote libraries and craft a malicious GIF file to send it to the user via WhatsApp (must be as an attachment, not as an image through Gallery Picker). When the user opens the Gallery view in WhatsApp, the GIF file will trigger a remote shell in WhatsApp context.
+2. Remote code execution: Pairing with an application that has an remote memory information disclosure vulnerability (e.g. browser), the attacker can collect the addresses of zygote libraries and craft a malicious GIF file to send it to the user via WhatsApp (must be as an attachment, not as an image through Gallery Picker). As soon as the user opens the Gallery view in WhatsApp (who never sends media files to friends, right?), the GIF file will trigger a remote shell in WhatsApp context.
 
 ## Appendix
 
