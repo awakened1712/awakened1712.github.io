@@ -291,7 +291,7 @@ C4 C8 21 C3 45 0C 1B 38 5C C8 70 71 43 06 08 1A
 00 00 00 00 00 00 00 00 00 00 00 2C 00 00 00 00
 18 00 0A 00 0F 00 01 00 00 3B
 ```
-Then copy the content into a GIF file and send it as Document with WhatsApp to the victim. Take note that it must not be sent as a Media file, otherwise WhatsApp tries to convert it into an MP4 before sending.
+Then copy the content into a GIF file and send it as Document with WhatsApp to another WhatsApp user. Take note that it must not be sent as a Media file, otherwise WhatsApp tries to convert it into an MP4 before sending.
 Upon the user receives the malicous GIF file, nothing will happen until the user open WhatsApp Gallery to send a media file to his/her friend.
 
 ## Affected versions
