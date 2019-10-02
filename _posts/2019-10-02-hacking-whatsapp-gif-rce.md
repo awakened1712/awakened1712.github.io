@@ -72,7 +72,7 @@ In Android, a double-free of a memory with size N leads to two subsequent memory
 (lldb) p/x (int)malloc(112)
 (int) $20 = 0xd379b250
  
-(lldb) p/x (int)malloc(102)
+(lldb) p/x (int)malloc(112)
 (int) $21 = 0xd379b250
 ```
 
