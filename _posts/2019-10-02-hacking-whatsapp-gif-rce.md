@@ -16,6 +16,18 @@ In this blog post, I'm going to share about a double-free vulnerability that I d
 
 Google Drive link to download if the above link is not accessible [https://drive.google.com/open?id=1X9nBlf5oj5ef2UoYGOfusjxAiow8nKEK](https://drive.google.com/open?id=1X9nBlf5oj5ef2UoYGOfusjxAiow8nKEK)
 
+The steps are as below:
+1. Attacker send GIF file to user via any channel (one of them could
+be send as Document via WhatsApp)
+2. User wants to send a media file to his/her friend. So the user
+presses on the Paper clip button and opens the WhatsApp Gallery to
+choose a media file to send to his friend.
+3. Since WhatsApp shows previews of every media (including the GIF
+file received), it will trigger the double-free bug and our RCE
+exploit.
+
+Take note that the user does not have to send anything because just opening the WhatsApp Gallery will trigger the bug.
+
 ## Double-free vulnerability in DDGifSlurp in decoding.c in libpl_droidsonroids_gif
 
 When a WhatsApp user opens Gallery view in WhatsApp to send a media file, WhatsApp parses it with a native library called `libpl_droidsonroids_gif.so` to generate the preview of the GIF file. `libpl_droidsonroids_gif.so` is an open-source library with source codes available at [https://github.com/koral--/android-gif-drawable/tree/dev/android-gif-drawable/src/main/c](https://github.com/koral--/android-gif-drawable/tree/dev/android-gif-drawable/src/main/c).
