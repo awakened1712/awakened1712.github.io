@@ -302,8 +302,8 @@ The exploit works well for Android 8.1 and 9.0, but does not work for Android 8.
 ## Attack vector
 With the above exploitation, we can have two attack vectors:
 
-1. A malicious app is installed on the Android device. The app collects addresses of zygote libraries and generates a malicious GIF file that results in code execution in WhatsApp context. This allows the malware app to steal files in WhatsApp sandbox including message database.
-2. Pairing with an application that has an information leak vulnerability (e.g. browser), the attacker can collect the addresses of zygote libraries and craft a malicious GIF file to send it to the user via WhatsApp (must be as an attachment, not as an image through Gallery Picker). When the user opens the Gallery view in WhatsApp, the GIF file will trigger a remote shell in WhatsApp context.
+1. Local privilege escaltion (from a user app to WhatsApp): A malicious app is installed on the Android device. The app collects addresses of zygote libraries and generates a malicious GIF file that results in code execution in WhatsApp context. This allows the malware app to steal files in WhatsApp sandbox including message database.
+2. Remote code execution: Pairing with an application that has an remote memory information disclosure vulnerability (e.g. browser), the attacker can collect the addresses of zygote libraries and craft a malicious GIF file to send it to the user via WhatsApp (must be as an attachment, not as an image through Gallery Picker). When the user opens the Gallery view in WhatsApp, the GIF file will trigger a remote shell in WhatsApp context.
 
 ## Appendix
 
