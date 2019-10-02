@@ -282,6 +282,8 @@ Upon the user receives the malicous GIF file, nothing will happen until the user
 ## Affected versions
 The exploit works well until WhatsApp version 2.19.230. The vulnerability is official patched in WhatsApp version 2.19.244
 
+The exploit works well for Android 8.1 and 9.0, but does not work Android 8.0 and below. In the older Android versions, double-free could still be triggered. However, because of the malloc calls by the system after the double-free, the app just crashes before reaching to the point that we could control the PC register.
+
 ## Attack vector
 With the above exploitation, we can have two attack vectors:
 
