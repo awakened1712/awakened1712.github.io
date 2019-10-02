@@ -78,27 +78,27 @@ In the above snippet, variable $foo was freed twice. As a result, the next two a
 Now look at struct GifInfo in gif.h
 ```c
 struct GifInfo {
-	void (*destructor)(GifInfo *, JNIEnv *);  <<-- there's a function pointer here
-	GifFileType *gifFilePtr;
-	GifWord originalWidth, originalHeight;
-	uint_fast16_t sampleSize;
-	long long lastFrameRemainder;
-	long long nextStartTime;
-	uint_fast32_t currentIndex;
-	GraphicsControlBlock *controlBlock;
-	argb *backupPtr;
-	long long startPos;
-	unsigned char *rasterBits;
-	uint_fast32_t rasterSize;
-	char *comment;
-	uint_fast16_t loopCount;
-	uint_fast16_t currentLoop;
-	RewindFunc rewindFunction;   <<-- there's another function pointer here
-	jfloat speedFactor;
-	uint32_t stride;
-	jlong sourceLength;
-	bool isOpaque;
-	void *frameBufferDescriptor;
+    void (*destructor)(GifInfo *, JNIEnv *);  <<-- there's a function pointer here
+    GifFileType *gifFilePtr;
+    GifWord originalWidth, originalHeight;
+    uint_fast16_t sampleSize;
+    long long lastFrameRemainder;
+    long long nextStartTime;
+    uint_fast32_t currentIndex;
+    GraphicsControlBlock *controlBlock;
+    argb *backupPtr;
+    long long startPos;
+    unsigned char *rasterBits;
+    uint_fast32_t rasterSize;
+    char *comment;
+    uint_fast16_t loopCount;
+    uint_fast16_t currentLoop;
+    RewindFunc rewindFunction;   <<-- there's another function pointer here
+    jfloat speedFactor;
+    uint32_t stride;
+    jlong sourceLength;
+    bool isOpaque;
+    void *frameBufferDescriptor;
 };
 ```
 We then craft a GIF file with three frames of below sizes:
