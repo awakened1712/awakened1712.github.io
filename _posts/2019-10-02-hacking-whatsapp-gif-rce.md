@@ -299,7 +299,7 @@ The exploit works well until WhatsApp version 2.19.230. The vulnerability is off
 
 The exploit works well for Android 8.1 and 9.0, but does not work for Android 8.0 and below. In the older Android versions, double-free could still be triggered. However, because of the malloc calls by the system after the double-free, the app just crashes before reaching to the point that we could control the PC register.
 
-## Attack vector
+## Attack vectors
 With the above exploitation, we can have two attack vectors:
 
 1. Local privilege escaltion (from a user app to WhatsApp): A malicious app is installed on the Android device. The app collects addresses of zygote libraries and generates a malicious GIF file that results in code execution in WhatsApp context. This allows the malware app to steal files in WhatsApp sandbox including message database.
