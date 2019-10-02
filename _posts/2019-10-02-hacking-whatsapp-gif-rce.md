@@ -8,6 +8,8 @@ header:
   teaser: /assets/img/android.png
 ---
 
+In this blog post, I'm going to share about a double-free vulnerability that I discovered in WhatsApp, and how I turn it into an RCE.
+
 # Demo
 [https://drive.google.com/file/d/1T-v5XG8yQuiPojeMpOAG6UGr2TYpocIj/view](https://drive.google.com/file/d/1T-v5XG8yQuiPojeMpOAG6UGr2TYpocIj/view)
 
