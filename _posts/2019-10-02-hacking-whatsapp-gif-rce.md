@@ -309,6 +309,9 @@ The exploit works well until WhatsApp version 2.19.230. The vulnerability is off
 
 The exploit works well for Android 8.1 and 9.0, but does not work for Android 8.0 and below. In the older Android versions, double-free could still be triggered. However, because of the malloc calls by the system after the double-free, the app just crashes before reaching to the point that we could control the PC register.
 
+Note that Facebook informed the developer of android-gif-drawable repo about the issue. The fix from Facebook was also merged into the original repo. [Version 1.2.18 of android-gif-drawable](https://github.com/koral--/android-gif-drawable/releases/tag/v1.2.18) is safe from the double-free bug.
+
+
 ## Attack vectors
 With the above exploitation, we can have two attack vectors:
 
