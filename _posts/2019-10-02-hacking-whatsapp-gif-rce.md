@@ -8,7 +8,9 @@ header:
   teaser: /assets/img/whatsapp.png
 ---
 
-In this blog post, I'm going to share about a double-free vulnerability that I discovered in WhatsApp for Android, and how I turned it into an RCE. I informed this to Facebook. Facebook acknowledged and patched it officially in WhatsApp version 2.19.244. WhatsApp users, please do update to latest WhatsApp version (2.19.244 or above) to get rid of this bug.
+In this blog post, I'm going to share about a double-free vulnerability that I discovered in WhatsApp for Android, and how I turned it into an RCE. I informed this to Facebook. Facebook acknowledged and patched it officially in WhatsApp version 2.19.244. Facebook helped to reserve CVE-2019-11932 for this issue.
+
+WhatsApp users, please do update to latest WhatsApp version (2.19.244 or above) to stay safe from this bug.
 
 ## Demo
 
