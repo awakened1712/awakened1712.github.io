@@ -273,6 +273,10 @@ Java.perform(function() {
     };
 });
 ```
+### Android: create Java byte array
+```javascript
+var buffer = Java.array('byte', [ 13, 37, 42 ]);
+```
 ### Android: Java bytearray dumping
 ```javascript
 function bytes2hex(array) {
