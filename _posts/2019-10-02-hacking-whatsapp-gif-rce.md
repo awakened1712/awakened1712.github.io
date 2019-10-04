@@ -262,7 +262,7 @@ In a normal Android system, because every processes are spawned from Zygotes, ev
 
 ## Putting everything together
 
-Just compile the code that I attached in the Appendix. Note that the address of `system()` and the gadget must be replaced by the actual address found by an information disclosure vulnerability (which is not covered in this blog post).
+Just compile the code in [this repo](https://github.com/awakened1712/CVE-2019-11932). Note that the address of `system()` and the gadget must be replaced by the actual address found by an information disclosure vulnerability (which is not covered in this blog post).
 ```
     /*
     Gadget g1:
@@ -279,7 +279,7 @@ Just compile the code that I attached in the Appendix. Note that the address of 
 
 Run the code to generate the corrupted GIF file:
 ```
-notroot@osboxes:~/Desktop/gif$ gcc -o exploit egif_lib.c exploit.c
+notroot@osboxes:~/Desktop/gif$ make
 .....
 .....
 .....
