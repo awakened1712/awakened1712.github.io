@@ -102,7 +102,7 @@ analytics:
 author:
   name             : "Awakened"
   avatar           : "/assets/img/avatar1.jpg"
-  bio              : "a technologist and an information security enthusiast"
+  bio              : "a security researcher"
   uri              : "/about/"
   home             : "/about/" # null (default), "absolute or relative url to link to author home"
   bitbucket        :
