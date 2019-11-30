@@ -103,7 +103,7 @@ function idaAddress(memBase, idaBase, memAddr) {
     return result;
 }
 ```
-### C: Hook HMAC function and print out the params
+### C: Hook a C function and print out the params
 ```javascript
 Interceptor.attach(Module.findExportByName("liba.so", "HMAC"), {
     onEnter: function (args) {
@@ -125,6 +125,16 @@ Interceptor.attach(fstatat, {
         Memory.writeUtf8String(args[1], "/empty");
     }
 });
+```
+### C: 
+```javascript
+const dlopen = new NativeFunction(Module.findExportByName(null, 'dlopen'), 'pointer', ['pointer', 'int']);
+const dlerror = new NativeFunction(Module.findExportByName(null, 'dlerror'), 'pointer', []);
+const path = Memory.allocUtf8String("/data/local/tmp/libdummy.so");
+var ret = dlopen(path, 2);
+console.log("ret = " + ret);
+var error = dlerror();
+console.log("error = " + Memory.readUtf8String(error));
 ```
 ### C: Print the backtraces of a list of functions
 ```javascript
