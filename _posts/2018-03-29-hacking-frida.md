@@ -82,6 +82,12 @@ On the attacking machine
 ```
 frida-trace -H 192.168.1.3 -i "open*"
 ```
+
+## Enable Javascript v8
+```
+--runtime=duk|v8
+```
+
 ## Common scripts
 ### Convert IDA address to memory address and vice versa
 ```javascript
@@ -293,6 +299,7 @@ Java.perform(function() {
 ### Android: create Java byte array
 ```javascript
 var buffer = Java.array('byte', [ 13, 37, 42 ]);
+var buffer = Java.array('byte', new Array(1024).fill(0));
 ```
 ### Android: Java bytearray dumping
 ```javascript
