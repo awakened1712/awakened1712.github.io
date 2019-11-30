@@ -187,6 +187,23 @@ var openPtr = Module.findExportByName("libc.so", "open");
 var open = new NativeFunction(openPtr, 'int', ['pointer', 'int']);
 var fd = open(Memory.allocUtf8String('/tmp/test.txt'), 0);
 ```
+### C: Read and write std string
+```javascript
+function readStdString(str) {
+    const isTiny = (str.readU8() & 1) === 0;
+    if (isTiny)
+        return str.add(1).readUtf8String();
+    return str.add(2 * Process.pointerSize).readPointer().readUtf8String();
+}
+
+function writeStdString(str, content) {
+    const isTiny = (str.readU8() & 1) === 0;
+    if (isTiny)
+        str.add(1).writeUtf8String(content);
+    else
+        str.add(2 * Process.pointerSize).readPointer().writeUtf8String(content);
+}
+```
 ### Android: Hook C remove() function to save a files that is going to be deleted
 ```javascript
 const File = Java.use("java.io.File");
