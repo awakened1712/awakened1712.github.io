@@ -46,3 +46,15 @@ public static String execRootCmd(String cmd) {
     return result;
 }
 ```
+### Preserve a root shell and execute commands as root
+build.gradle
+```
+dependencies {
+    implementation 'com.jrummyapps:android-shell:1.0.0'
+}
+```
+Java
+```
+CommandResult result = Shell.SU.run("id");
+Log.i("TAG", result.getStdout());
+```
