@@ -55,6 +55,9 @@ dependencies {
 ```
 Java
 ```
+import com.jrummyapps.android.shell.CommandResult;
+import com.jrummyapps.android.shell.Shell;
+
 CommandResult result = Shell.SU.run("id");
 Log.i("TAG", result.getStdout());
 ```
