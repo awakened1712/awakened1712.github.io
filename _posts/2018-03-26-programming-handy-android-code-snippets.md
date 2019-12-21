@@ -54,7 +54,7 @@ dependencies {
 }
 ```
 Java
-```
+```java
 import com.jrummyapps.android.shell.CommandResult;
 import com.jrummyapps.android.shell.Shell;
 
