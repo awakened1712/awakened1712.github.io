@@ -288,8 +288,7 @@ Java.perform(function() {
     System.loadLibrary.implementation = function(library) {
         try {
             console.log('System.loadLibrary("' + library + '")');
-            const loaded = Runtime.getRuntime().loadLibrary0(VMStack.getCallingClassLoader(), library);
-            return loaded;
+            Runtime.getRuntime().loadLibrary0(VMStack.getCallingClassLoader(), library);
         } catch(ex) {
             console.log(ex);
         }
@@ -298,8 +297,7 @@ Java.perform(function() {
     System.load.implementation = function(library) {
         try {
             console.log('System.load("' + library + '")');
-            const loaded = Runtime.getRuntime().load0(VMStack.getCallingClassLoader(), library);
-            return loaded;
+            Runtime.getRuntime().nativeLoad(library, VMStack.getCallingClassLoader());
         } catch(ex) {
             console.log(ex);
         }
