@@ -353,3 +353,6 @@ function inspectObject(obj) {
         console.log("\t\t" + methods[i].toString());
 }
 ```
+
+TODO: add references
+https://awesomeopensource.com/project/iddoeldor/frida-snippets
