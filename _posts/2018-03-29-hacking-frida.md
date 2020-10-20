@@ -72,7 +72,10 @@ Trace an Obj-C method of Safari app
 ```
 $ frida-trace -U -m "-[NSView drawRect:]" Safari
 ```
-
+Trace a all Java methods of class BitmapFactory that contain `native` in method name
+```
+$ frida-trace -U -j '*BitmapFactory*!*native*' com.android.chrome
+```
 ## Frida over network
 On the target device (192.168.1.3)
 ```
